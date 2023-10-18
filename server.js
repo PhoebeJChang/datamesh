@@ -31,6 +31,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 const port = process.env.PORT || 5100;
+// const azure_port = process.env.AZURE_PORT || 1433;
 
 const mysql_config = mysql.createConnection({
   host: process.env.MYSQL_HOST,
@@ -40,9 +41,9 @@ const mysql_config = mysql.createConnection({
 })
 
 const azure_config = {
-    user: 'A01RF',
-    password: 'MCmX+89415',
-    server: 'datamesh.database.windows.net',
+    user: process.env.AZURE_USER,
+    password: process.env.AZURE_PASSWORD,
+    server: process.env.AZURE_SERVER,
     port: 1433,
     database: 'datamesh',
     authentication: {
@@ -77,7 +78,7 @@ app.get('/', (req, res) => {
     if (err) throw err;
     res.send("Result: " + JSON.stringify(result));
   });
-  
+
   // var resultSet = azure_con.request().query(`select * from accounts`);
   // res.send("Result: " + resultSet.recordset);
   
