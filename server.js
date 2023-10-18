@@ -7,16 +7,15 @@ import mongoose from 'mongoose';
 import { body, validationResult } from 'express-validator';
 import { validateTest } from './middleware/validationMiddleware.js'
 
+
 //routers
 import medCaseRouter from './routes/medCaseRouter.js'
 
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
-// import mysql from 'mysql';
+import mysql from 'mysql';
 
-
-// const mysql = require('mysql')
 dotenv.config();
 const app = express();
 
@@ -29,16 +28,44 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 
+const port = process.env.PORT || 5100;
+
+const con = mysql.createConnection({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: "datamesh"
+})
+
+try {
+  await mongoose.connect(process.env.MONGO_URL)
+  con.connect(function(err) {
+    if (err) throw err;
+  });
+
+  app.listen(port, () => {
+    console.log(`server running on PORT ${port}....`);
+  });
+  
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}
+
 //repond to get request
 app.get('/', (req, res) => {
-  res.send('Helloooooo');
+  // res.send('Hello');
+  con.query("select * from accounts", function (err, result) {
+    if (err) throw err;
+    res.send("Result: " + JSON.stringify(result));
+  });
 });
 
 app.post('/api/v1/test',
   validateTest,
   (req, res) => {
     const { name } = req.body;
-    res.json({ message: `hello ${name}` });
+    res.json({ message: `hello ${name}`});
   })
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -57,17 +84,7 @@ app.use('*', (req, res) => {
 // get trigger by the existing rout
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 5100;
 
-try {
-  await mongoose.connect(process.env.MONGO_URL)
-  app.listen(port, () => {
-    console.log(`server running on PORT ${port}....`);
-  });
-} catch (error) {
-  console.log(error);
-  process.exit(1);
-}
 
 
 
