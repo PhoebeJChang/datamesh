@@ -16,6 +16,8 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 import mysql from 'mysql';
 
+import mssql from 'mssql';
+
 dotenv.config();
 const app = express();
 
@@ -30,18 +32,33 @@ app.use(express.json());
 
 const port = process.env.PORT || 5100;
 
-const con = mysql.createConnection({
+const mysql_config = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: "datamesh"
 })
 
+const azure_config = {
+    user: 'A01RF',
+    password: 'MCmX+89415',
+    server: 'datamesh.database.windows.net',
+    port: 1433,
+    database: 'datamesh',
+    authentication: {
+        type: 'default'
+    },
+    options: {
+        encrypt: true
+    }
+}
+
 try {
   await mongoose.connect(process.env.MONGO_URL)
-  con.connect(function(err) {
+  mysql_config.connect(function(err) {
     if (err) throw err;
   });
+  mssql.connect(azure_config);
 
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
@@ -55,10 +72,15 @@ try {
 //repond to get request
 app.get('/', (req, res) => {
   // res.send('Hello');
-  con.query("select * from accounts", function (err, result) {
+
+  mysql_config.query("select * from accounts", function (err, result) {
     if (err) throw err;
     res.send("Result: " + JSON.stringify(result));
   });
+  
+  // var resultSet = azure_con.request().query(`select * from accounts`);
+  // res.send("Result: " + resultSet.recordset);
+  
 });
 
 app.post('/api/v1/test',
