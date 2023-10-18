@@ -1,4 +1,3 @@
-import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import express from 'express'
 import morgan from 'morgan';
@@ -21,10 +20,15 @@ import mssql from 'mssql';
 dotenv.config();
 const app = express();
 
+let jobs = [
+  { id: nanoid(), company: 'apple', position: 'front-end' },
+  { id: nanoid(), company: 'google', position: 'back-end' },
+];
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
 
 app.use(morgan('dev'));
 
