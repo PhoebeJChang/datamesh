@@ -1,3 +1,4 @@
+
 import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import express from 'express'
@@ -6,29 +7,20 @@ import jobRouter from './routes/jobRouter.js'
 import mongoose from 'mongoose';
 import { body, validationResult } from 'express-validator';
 import { validateTest } from './middleware/validationMiddleware.js'
-
 //routers
 import medCaseRouter from './routes/medCaseRouter.js'
-
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
-
 import mysql from 'mysql';
-
 import mssql from 'mssql';
-
 dotenv.config();
 const app = express();
-
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
 app.use(morgan('dev'));
-
 app.use(express.json());
-
 //respond to get request, query will move later
 app.get('/', (req, res) => {
   // res.send('Hello');
@@ -37,18 +29,15 @@ app.get('/', (req, res) => {
     res.send("Result: " + JSON.stringify(result));
   });
 });
-
 app.post('/api/v1/test',
   validateTest,
   (req, res) => {
     const { name } = req.body;
     res.json({ message: `hello ${name}` });
   })
-
 //!!!!!!!!!!!!!!!!!!!!!!!!!
 //宣告要的router files
 app.use('/api/v1/medCases', medCaseRouter);
-
 
 //any method, all the urls
 //everytime the user trying to access some kinf of resource that we don't have on our server
@@ -56,20 +45,16 @@ app.use('/api/v1/medCases', medCaseRouter);
 app.use('*', (req, res) => {
   res.status(404).json({ msg: 'not found' });
 });
-
 //not found and error rout
 // get trigger by the existing rout
 app.use(errorHandlerMiddleware);
-
 const port = process.env.PORT || 5100;
-
 const mysql_config = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: "datamesh"
 })
-
 const azure_config = {
   user: process.env.AZURE_USER,
   password: process.env.AZURE_PASSWORD,
@@ -83,14 +68,12 @@ const azure_config = {
       encrypt: true
   }
 }
-
 try {
   await mongoose.connect(process.env.MONGO_URL)
   // mysql_config.connect(function(err) {
   //   if (err) throw err;
   // });
   // mssql.connect(azure_config);
-
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
   });
@@ -99,6 +82,3 @@ try {
   console.log(error);
   process.exit(1);
 }
-
-
-
