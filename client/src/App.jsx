@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { HomeLayout, Register, Login, DashboardLayout, Landing, Error, AddJob, Stats, AllPatients, Profile, Admin } from './pages'
+import { HomeLayout, Register, Login, DashboardLayout, Landing, Error, AddMedCase, Stats, AllPatients, Profile, Admin } from './pages'
 //if the export is 'default'then we don't need {}   
 
 
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         children:[
           {
             index: true,
-            element:<AddJob />
+            element:<AddMedCase />
           },
           {
             path: 'stats',

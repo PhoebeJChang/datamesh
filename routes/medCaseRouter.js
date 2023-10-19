@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import { validateMedCaseInput, validateIdParams } from '../middleware/validationMiddleware.js';
 const router = Router();
 
-import{
+import {
   getAllMedCases,
   createMedCase,
   getMedCase,
@@ -9,7 +10,11 @@ import{
   deleteMedCase
 } from '../controllers/medCaseController.js'
 
-router.route('/').get(getAllMedCases).post(createMedCase);
-router.route('/:id_number').get(getMedCase).patch(updateMedCase).delete(deleteMedCase);
+router.route('/').get(getAllMedCases).post(validateMedCaseInput, createMedCase);
+router
+  .route('/:id_number')
+  .get(validateIdParams, getMedCase)
+  .patch(validateMedCaseInput, validateIdParams, updateMedCase)
+  .delete(validateIdParams, deleteMedCase);
 
 export default router;

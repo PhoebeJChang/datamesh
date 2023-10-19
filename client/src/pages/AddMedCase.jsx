@@ -1,9 +1,9 @@
 // import React from 'react'
-
-const AddJob = () => {
+//This is add patient page
+const AddMedCase = () => {
   return (
     <h1>sth here, this is index page</h1>
   );
 };
 
-export default AddJob
+export default AddMedCase

@@ -1,5 +1,7 @@
-import { body, validationResult } from 'express-validator';
-import { BadRequestError } from '../errors/customErrors.js';
+import { body, param, validationResult } from 'express-validator';
+import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
+import mongoose from 'mongoose';
+import MedCase from '../models/MedCaseModel.js';
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -8,6 +10,10 @@ const withValidationErrors = (validateValues) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
+        console.log("ERRORMMM ", errorMessages[0])
+        if (errorMessages[0].startsWith('Invalid MongoDB')) { // it should be noy found will be better
+          throw new NotFoundError(errorMessages);
+        }
         throw new BadRequestError(errorMessages);
       }
       next();
@@ -15,11 +21,38 @@ const withValidationErrors = (validateValues) => {
   ];
 };
 
-export const validateTest = withValidationErrors([
-  body('name')
-    .notEmpty()
-    .withMessage('name is required')
-    .isLength({ min: 3, max: 50 })
-    .withMessage('name must be more than 3 letters, below 50 letters')
-    .trim(),
+export const validateMedCaseInput = withValidationErrors([
+  // body('hospital_id').notEmpty().withMessage('hospital id is required'),
+  // body('hospital_name').notEmpty().withMessage('hospital name is required'),
+  body('chart_no').notEmpty().withMessage('chart no is required'),
+  body('patient_name').notEmpty().withMessage('patient name is required'),
+  body('patient_gender').notEmpty().withMessage('patient gender is required'),
+  body('id_number').notEmpty().withMessage('id number is required'),
+  body('birth_date').notEmpty().withMessage('birth date is required'),
+  // body('birth_place').notEmpty().withMessage('birth place is required'),
+  // body('weight').notEmpty().withMessage(' is required'),
+  // body('current_address').notEmpty().withMessage(' is required'),
+  // body('profession').notEmpty().withMessage(' is required'),
+  // body('work_unit').notEmpty().withMessage(' is required'),
+  // body('contact_information').notEmpty().withMessage(' is required'),
+  // body('admitting_time').notEmpty().withMessage(' is required'),
+  // body('inf_recording_time').notEmpty().withMessage(' is required'),
+  // body('history_recorder').notEmpty().withMessage(' is required'),
+]);
+
+export const validateIdParams = withValidationErrors([
+  param('id_number')
+    .custom(async (value) => {
+      const isValidId = mongoose.Types.ObjectId.isValid(value);
+      if (!isValidId) {
+        throw new BadRequestError('Invalid MongoDB id');
+      }
+      const medCase = await MedCase.findById(value);//id_number
+
+      console.log(medCase);
+      //if there is no medCase/patient
+      if (!medCase) {
+        throw new NotFoundError(`no medCase with id_number ${value}`)
+      }
+    }),
 ])
