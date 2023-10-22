@@ -1,5 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { HomeLayout, Register, Login, DashboardLayout, Landing, Error, AddMedCase, Stats, AllPatients, Profile, Admin } from './pages'
+import { 
+  HomeLayout, 
+  Register, 
+  Login, 
+  DashboardLayout, 
+  Landing, 
+  Error, 
+  AddMedCase, 
+  Stats, 
+  AllPatients, 
+  Profile, 
+  Admin, 
+  DbsState } from './pages'
 //if the export is 'default'then we don't need {}   
 
 
@@ -52,6 +64,10 @@ const router = createBrowserRouter([
           {
             path: 'all-patients',
             element: <AllPatients />,
+          },
+          {
+            path: 'dbs-state',
+            element: <DbsState />,
           },
           {
             path: 'profile',

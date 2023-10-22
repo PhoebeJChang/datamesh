@@ -19,6 +19,11 @@ const links = [
     icon: <MdQueryStats />,
   },
   {
+    text: 'DBs state', 
+    path: 'dbs-state', 
+    icon: <MdQueryStats />,
+  },
+  {
     text: 'stats', 
     path: 'stats', 
     icon: <IoBarChartSharp />,

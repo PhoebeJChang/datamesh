@@ -13,6 +13,7 @@ export const register = async (req, res) => {
   req.body.password = hashedPassword;
 
   const user = await User.create(req.body)
+  //if you want to test the api, use json({user})
   res.status(StatusCodes.CREATED).json({ msg: 'User created' });
 }
 export const login = async (req, res) => {
