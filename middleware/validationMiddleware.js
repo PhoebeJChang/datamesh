@@ -1,7 +1,13 @@
+/*************************
+ * This file is for all the validate info
+ * look "models" as a guidlines 
+ *************************/
+
 import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
 import mongoose from 'mongoose';
 import MedCase from '../models/MedCaseModel.js';
+import User from '../models/UserModel.js'
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -21,23 +27,26 @@ const withValidationErrors = (validateValues) => {
   ];
 };
 
+/**************************
+ * Medcase validators
+ **************************/
 export const validateMedCaseInput = withValidationErrors([
-  // body('hospital_id').notEmpty().withMessage('hospital id is required'),
-  // body('hospital_name').notEmpty().withMessage('hospital name is required'),
+  body('hospital_id').notEmpty().withMessage('hospital id is required'),
+  body('hospital_name').notEmpty().withMessage('hospital name is required'),
   body('chart_no').notEmpty().withMessage('chart no is required'),
   body('patient_name').notEmpty().withMessage('patient name is required'),
   body('patient_gender').notEmpty().withMessage('patient gender is required'),
   body('id_number').notEmpty().withMessage('id number is required'),
   body('birth_date').notEmpty().withMessage('birth date is required'),
-  // body('birth_place').notEmpty().withMessage('birth place is required'),
-  // body('weight').notEmpty().withMessage(' is required'),
-  // body('current_address').notEmpty().withMessage(' is required'),
-  // body('profession').notEmpty().withMessage(' is required'),
-  // body('work_unit').notEmpty().withMessage(' is required'),
-  // body('contact_information').notEmpty().withMessage(' is required'),
-  // body('admitting_time').notEmpty().withMessage(' is required'),
-  // body('inf_recording_time').notEmpty().withMessage(' is required'),
-  // body('history_recorder').notEmpty().withMessage(' is required'),
+  body('birth_place').notEmpty().withMessage('birth place is required'),
+  body('weight').notEmpty().withMessage(' is required'),
+  body('current_address').notEmpty().withMessage(' is required'),
+  body('profession').notEmpty().withMessage(' is required'),
+  body('work_unit').notEmpty().withMessage(' is required'),
+  body('contact_information').notEmpty().withMessage(' is required'),
+  body('admitting_time').notEmpty().withMessage(' is required'),
+  body('inf_recording_time').notEmpty().withMessage(' is required'),
+  body('history_recorder').notEmpty().withMessage(' is required'),
 ]);
 
 export const validateIdParams = withValidationErrors([
@@ -55,4 +64,25 @@ export const validateIdParams = withValidationErrors([
         throw new NotFoundError(`no medCase with id_number ${value}`)
       }
     }),
+]);
+
+export const validateRegisterInput = withValidationErrors([
+  body('name').notEmpty().withMessage('name is required'),
+  body('email')
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('invalid email format')
+    //check the email is uniquemor not
+    .custom(async (email) => {
+      const user = await User.findOne({ email })
+      if (user) {
+        throw new BadRequestError('email already exists');
+      }
+    }),
+  body('password')
+    .notEmpty()
+    .withMessage('password is required')
+    .isLength({ min: 8 })
+    .withMessage('password must be atleast 8 character long')
 ])
