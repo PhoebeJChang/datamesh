@@ -15,9 +15,9 @@ export const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ msg: 'User Created' });
 }
 export const login = async (req, res) => {
-  const hashedPassword = await User.findOne({email:req.body.email}, 'password').password;
-  const checkPassword = await checkPassword(hashedPassword, req.body.password);
-  if (checkPassword) {
+  const hashedPassword = (await User.findOne({email: req.body.email}, 'password')).password;
+  const checkedRes = await checkPassword(req.body.password, hashedPassword);
+  if (checkedRes) {
     res.status(StatusCodes.OK).json({ msg: 'Login Sucessed' });
   }
   else {
