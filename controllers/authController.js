@@ -10,7 +10,7 @@ export const register = async (req, res) => {
   // the password hash is in the utils file
   const hashedPassword = await hashPassword(req.body.password);
   req.body.password = hashedPassword;
-  const user = await User.create(req.body)
+  const user = await User.create(req.body);
   //if you want to test the api, use json({user})
   res.status(StatusCodes.CREATED).json({ msg: 'User Created' });
 }
