@@ -1,6 +1,10 @@
 import { StatusCodes } from "http-status-codes";
 import User from "../models/UserModel.js";
 import { checkPassword, hashPassword } from "../utils/passwordUtils.js";
+import moment from "moment-timezone";
+
+const dateTaipei = moment.tz(Date.now(), "Asia/Taipei");
+console.log(dateTaipei);
 
 export const register = async (req, res) => {
   // first registered user is an admin
@@ -10,7 +14,7 @@ export const register = async (req, res) => {
   // the password hash is in the utils file
   const hashedPassword = await hashPassword(req.body.password);
   req.body.password = hashedPassword;
-  const user = await User.create(req.body)
+  const user = await User.create(req.body);
   //if you want to test the api, use json({user})
   res.status(StatusCodes.CREATED).json({ msg: 'User Created' });
 }
