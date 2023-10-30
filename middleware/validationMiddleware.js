@@ -8,6 +8,7 @@ import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
 import mongoose from 'mongoose';
 import MedCase from '../models/MedCaseModel.js';
 import User from '../models/UserModel.js'
+import basic_inf from '../models/BasicInfModel.js';
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -66,6 +67,40 @@ export const validateIdParams = withValidationErrors([
     }),
 ]);
 
+export const validateUserName = withValidationErrors([
+  param('name')
+    .custom(async (value) => {
+      const isValidId = mongoose.Types.ObjectId.isValid(value);
+      if (!isValidId) {
+        throw new BadRequestError('Invalid MongoDB id');
+      }
+      const users = await User.findById(value);//id_number
+
+      console.log(users);
+      //if there is no medCase/patient
+      if (!users) {
+        throw new NotFoundError(`no user with name ${value}`)
+      }
+    }),
+]);
+
+export const validateBasic = withValidationErrors([
+  param('chart_no')
+    .custom(async (value) => {
+      const isValidId = mongoose.Types.ObjectId.isValid(value);
+      if (!isValidId) {
+        throw new BadRequestError('Invalid MongoDB id');
+      }
+      const basic = await basic_inf.findById(value);//id_number
+
+      console.log(basic);
+      //if there is no medCase/patient
+      if (!basic) {
+        throw new NotFoundError(`no user with name ${value}`)
+      }
+    }),
+]);
+
 //register validation
 export const validateRegisterInput = withValidationErrors([
   body('name').notEmpty().withMessage('name is required'),
@@ -99,3 +134,22 @@ export const validateLoginInput = withValidationErrors([
     .notEmpty()
     .withMessage('password is required')
 ])
+
+//basic timestamp setting
+// const updateBasicInf = (req, res) => {
+//   // basic update messages
+
+//   // after basic and set timestamp with current time
+//   req.basicInf.timestamp = new Date();
+
+//   // restore the newest file
+//   req.basicInf.save((err, updatedBasicInf) => {
+//     if (err) {
+//       return res.status(500).json({ error: "update failed!" });
+//     }
+//     return res.json(updatedBasicInf);
+//   });
+// };
+// module.exports = {
+//   updateBasicInf
+// };
