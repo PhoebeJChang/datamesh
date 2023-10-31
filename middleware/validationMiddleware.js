@@ -5,10 +5,11 @@
 
 import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
-import mongoose from 'mongoose';
+import mongoose, { model, models } from 'mongoose';
 import MedCase from '../models/MedCaseModel.js';
 import User from '../models/UserModel.js'
-import basic_inf from '../models/BasicInfModel.js';
+import Basicinf from '../models/BasicInfModel.js';
+import Historys from '../models/HistoryModel.js';
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -74,10 +75,10 @@ export const validateUserName = withValidationErrors([
       if (!isValidId) {
         throw new BadRequestError('Invalid MongoDB id');
       }
-      const users = await User.findById(value);//id_number
+      const users = await User.findById(value);//name
 
       console.log(users);
-      //if there is no medCase/patient
+      //if there is no user
       if (!users) {
         throw new NotFoundError(`no user with name ${value}`)
       }
@@ -91,11 +92,28 @@ export const validateBasic = withValidationErrors([
       if (!isValidId) {
         throw new BadRequestError('Invalid MongoDB id');
       }
-      const basic = await basic_inf.findById(value);//id_number
+      const basic = await Basicinf.findById(value);//chart_no
 
       console.log(basic);
-      //if there is no medCase/patient
+      //if there is no basicinf
       if (!basic) {
+        throw new NotFoundError(`no user with name ${value}`)
+      }
+    }),
+]);
+
+export const validateHistory = withValidationErrors([
+  param('chart_no')
+    .custom(async (value) => {
+      const isValidId = mongoose.Types.ObjectId.isValid(value);
+      if (!isValidId) {
+        throw new BadRequestError('Invalid MongoDB id');
+      }
+      const history = await Historys.findById(value);//chart_no
+
+      console.log(history);
+      //if there is no basicinf
+      if (!history) {
         throw new NotFoundError(`no user with name ${value}`)
       }
     }),

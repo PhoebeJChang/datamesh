@@ -76,4 +76,4 @@ const BasicInfSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model('basic_inf', BasicInfSchema);
+export default mongoose.model('Basicinf', BasicInfSchema,'Basicinf');
