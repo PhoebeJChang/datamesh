@@ -3,9 +3,6 @@ import User from "../models/UserModel.js";
 import { checkPassword, hashPassword } from "../utils/passwordUtils.js";
 import moment from "moment-timezone";
 
-const dateTaipei = moment.tz(Date.now(), "Asia/Taipei");
-console.log(dateTaipei);
-
 export const register = async (req, res) => {
   // first registered user is an admin
   // const isFirstAccount = (await User.countDocuments()) === 0;
@@ -19,7 +16,7 @@ export const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ msg: 'User Created' });
 }
 export const login = async (req, res) => {
-  const hashedPassword = (await User.findOne({email: req.body.email}, 'password')).password;
+  const hashedPassword = (await User.findOne({id: req.body.id}, 'password')).password;
   const checkedRes = await checkPassword(req.body.password, hashedPassword);
   if (checkedRes) {
     res.status(StatusCodes.OK).json({ msg: 'Login Sucessed' });

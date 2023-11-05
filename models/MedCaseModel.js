@@ -1,24 +1,11 @@
 import mongoose from "mongoose";
 
-const BasicInfSchema = new mongoose.Schema(
-  {
-    hospital_id:{
-      type: Number,
-      required: [true, 'hospital id is required!'] // not null
-    },
-    hospital_name:{
-      type: String,
-      required: [true, 'hospital name is required!']
-    },
+const BasicInfSchema = new mongoose.Schema({
     chart_no:{
         type: Number,
         unique: true, // primary key
-        required: [true, 'chart no is required!']
     },
-    patient_name:{
-        type: String,
-        required: [true, 'patient name is required!']
-    },
+    patient_name: String,
     patient_gender:{
         type: String,
         required: [true, 'patient gender is required!']

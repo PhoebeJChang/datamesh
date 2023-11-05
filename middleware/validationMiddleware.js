@@ -68,32 +68,84 @@ export const validateIdParams = withValidationErrors([
 
 //register validation
 export const validateRegisterInput = withValidationErrors([
-  body('name').notEmpty().withMessage('name is required'),
+  body('id')
+    .notEmpty()
+    .withMessage('id is required')
+    .isLength(6)
+    .isNumeric()
+    .withMessage('invalid id format')
+    //check the id is unique or not
+    .custom(async (id) => {
+      const user_id = await User.findOne({ id })
+      if (user_id) {
+        throw new BadRequestError('id already exists');
+      }
+  }),
+
+  body('name')
+    .notEmpty()
+    .withMessage('name is required'),
+
+  body('phone')
+    .notEmpty()
+    .withMessage('phone is required')
+    .isMobilePhone('zh-TW')
+    .withMessage('invalid phone format'),
+
+  body('birthday')
+    .notEmpty()
+    .withMessage('birthday is required')
+    .isDate()
+    .withMessage('invalid birthday format'),
+
   body('email')
     .notEmpty()
     .withMessage('email is required')
     .isEmail()
     .withMessage('invalid email format')
-    //check the email is uniquemor not
+    //check the email is unique or not
     .custom(async (email) => {
-      const user = await User.findOne({ email })
-      if (user) {
+      const user_email = await User.findOne({ email })
+      if (user_email) {
         throw new BadRequestError('email already exists');
       }
     }),
+
+  body('gender')
+    .notEmpty()
+    .withMessage('gender is required'),
+
+  body('department')
+    .notEmpty()
+    .withMessage('department is required'),
+
   body('password')
     .notEmpty()
     .withMessage('password is required')
-    .isLength({ min: 8 })
-    .withMessage('password must be atleast 8 character long')
+    // .isLength({ min: 8 })
+    // .withMessage('password must be atleast 8 character long')
+    .isStrongPassword({
+      minLength: 8,
+      minUppercase: 1,
+      minLowercase: 1,
+      minNumbers: 1,
+      minSymbols: 0
+    })
+    .withMessage('invalid password format')
 ])
 
 export const validateLoginInput = withValidationErrors([
-  body('email')
+  // body('email')
+  //   .notEmpty()
+  //   .withMessage('email is required')
+  //   .isEmail()
+  //   .withMessage('invalid email format'),
+  body('id')
     .notEmpty()
-    .withMessage('email is required')
-    .isEmail()
-    .withMessage('invalid email format'),
+    .withMessage('id is required')
+    .isLength(6)
+    .isNumeric()
+    .withMessage('invalid id format'),
     
   body('password')
     .notEmpty()
