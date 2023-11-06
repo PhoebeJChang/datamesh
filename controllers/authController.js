@@ -1,7 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import User from "../models/UserModel.js";
 import { checkPassword, hashPassword } from "../utils/passwordUtils.js";
-import moment from "moment-timezone";
+
+
 
 export const register = async (req, res) => {
   // first registered user is an admin
@@ -24,4 +25,28 @@ export const login = async (req, res) => {
   else {
     res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Login Failed' });
   }
+}
+
+export const getAllUsers = async (req, res) => {
+  const basicInfos = await User.find({});
+  res.status(StatusCodes.OK).json({ basicInfos });
+};
+
+export const getUser = async (req, res) => {
+  const basicInfo = await User.findOne({id: req.params.id})  
+  res.status(StatusCodes.OK).json({ basicInfo });
+}
+
+// EDIT User
+export const updateUser = async (req, res) => {
+  const updatedUser = await User.findOneAndUpdate({id: req.params.id}, req.body, {
+    new: true
+  })
+  res.status(StatusCodes.OK).json({ msg: 'User Updated' });
+}
+
+// DELETE User
+export const deleteUser = async (req, res) => {
+  const removeUser = await User.findOneAndDelete({id: req.params.id});
+  res.status(StatusCodes.OK).json({ msg: 'User Deleted'});
 }

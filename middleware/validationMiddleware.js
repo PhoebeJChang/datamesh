@@ -8,6 +8,8 @@ import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
 import mongoose from 'mongoose';
 import MedCase from '../models/MedCaseModel.js';
 import User from '../models/UserModel.js'
+import BasicInfo from '../models/BasicInfoModel.js';
+
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -30,16 +32,16 @@ const withValidationErrors = (validateValues) => {
 /**************************
  * Medcase validators
  **************************/
-export const validateMedCaseInput = withValidationErrors([
+export const validateBasicInfoInput  = withValidationErrors([
   body('medical_history_no')
     .notEmpty()
-    .withMessage('medical history number is required'),
+    .withMessage('medical history number is required')
     .isLength(8)
     .isNumeric()
     .withMessage('invalid medical history number format')
     //check the id is unique or not
     .custom(async (medical_history_no) => {
-     const patient_medical = await User.findOne({ medical_history_no })
+     const patient_medical = await BasicInfo.findOne({ medical_history_no })
       if (patient_medical) {
         throw new BadRequestError('medical history number already exists');
       }
@@ -52,11 +54,11 @@ export const validateMedCaseInput = withValidationErrors([
   .withMessage('invalid id number format')
   //check the id is unique or not
   .custom(async (id_number) => {
-    const patient_id = await User.findOne({ id_number })
+    const patient_id = await BasicInfo.findOne({ id_number })
     if (patient_id) {
       throw new BadRequestError('id number already exists');
     }
-}),
+  }),
 
   body('name')
     .notEmpty()
@@ -74,13 +76,13 @@ export const validateMedCaseInput = withValidationErrors([
 
   body('height')
     .notEmpty()
-    .withMessage('height is required'),
+    .withMessage('height is required')
     .isNumeric()
     .withMessage('invalid height format'),
 
   body('weight')
     .notEmpty()
-    .withMessage('weight is required'),
+    .withMessage('weight is required')
     .isNumeric()
     .withMessage('invalid weight format'),
 
@@ -101,11 +103,11 @@ export const validateMedCaseInput = withValidationErrors([
     .withMessage('invalid email format')
     //check the email is unique or not
     .custom(async (email) => {
-      const user_email = await User.findOne({ email })
+      const user_email = await BasicInfo.findOne({ email })
       if (user_email) {
         throw new BadRequestError('email already exists');
       }
-    });
+    }),
 
   body('profession')
     .notEmpty()
@@ -114,23 +116,122 @@ export const validateMedCaseInput = withValidationErrors([
   body('history_recorder')
     .notEmpty()
     .withMessage('history recorder is required')
-]);
+  ]);
 
-export const validateIdParams = withValidationErrors([
-  param('id_number')
-    .custom(async (value) => {
-      const isValidId = mongoose.Types.ObjectId.isValid(value);
-      if (!isValidId) {
-        throw new BadRequestError('Invalid MongoDB id');
-      }
-      const medCase = await MedCase.findById(value);//id_number
-
-      console.log(medCase);
-      //if there is no medCase/patient
-      if (!medCase) {
-        throw new NotFoundError(`no medCase with id_number ${value}`)
+  export const validateMedCaseInput  = withValidationErrors([
+    body('medical_history_no')
+      .notEmpty()
+      .withMessage('medical history number is required')
+      .isLength(8)
+      .isNumeric()
+      .withMessage('invalid medical history number format')
+      //check the id is unique or not
+      .custom(async (medical_history_no) => {
+       const patient_medical = await User.findOne({ medical_history_no })
+        if (patient_medical) {
+          throw new BadRequestError('medical history number already exists');
+        }
+    }),
+  
+    body('id_number')
+    .notEmpty()
+    .withMessage('id number is required')
+    .isLength(10)
+    .withMessage('invalid id number format')
+    //check the id is unique or not
+    .custom(async (id_number) => {
+      const patient_id = await User.findOne({ id_number })
+      if (patient_id) {
+        throw new BadRequestError('id number already exists');
       }
     }),
+  
+    body('name')
+      .notEmpty()
+      .withMessage('name is required'),
+  
+    body('gender')
+      .notEmpty()
+      .withMessage('gender is required'),
+  
+    body('birth_date')
+      .notEmpty()
+      .withMessage('birth date is required')
+      .isDate()
+      .withMessage('invalid birthday format'),
+  
+    body('height')
+      .notEmpty()
+      .withMessage('height is required')
+      .isNumeric()
+      .withMessage('invalid height format'),
+  
+    body('weight')
+      .notEmpty()
+      .withMessage('weight is required')
+      .isNumeric()
+      .withMessage('invalid weight format'),
+  
+    body('address')
+      .notEmpty()
+      .withMessage('address is required'),
+  
+    body('phone')
+      .notEmpty()
+      .withMessage('phone is required')
+      .isMobilePhone('zh-TW')
+      .withMessage('invalid phone format'),
+  
+    body('email')
+      .notEmpty()
+      .withMessage('email is required')
+      .isEmail()
+      .withMessage('invalid email format')
+      //check the email is unique or not
+      .custom(async (email) => {
+        const user_email = await User.findOne({ email })
+        if (user_email) {
+          throw new BadRequestError('email already exists');
+        }
+      }),
+  
+    body('profession')
+      .notEmpty()
+      .withMessage('profession is required'),
+  
+    body('history_recorder')
+      .notEmpty()
+      .withMessage('history recorder is required')
+    ]);
+
+export const validateIdParams = withValidationErrors([
+  param('id')
+    .custom(async (value) => {
+      const isValidId = param.isLength(6).isNumeric()
+      if (!isValidId) {
+        throw new BadRequestError('Invalid id format');
+      }
+
+      const user = await User.findOne({ value })
+      if (!user) {
+        throw new NotFoundError(`no user with id ${value}`)
+      }
+    })
+]);
+
+export const validateMDParams = withValidationErrors([
+  param('medical_history_no')
+    .custom(async (value) => {
+      const isValidId = param.isLength(8).isNumeric()
+      if (!isValidId) {
+        throw new BadRequestError('Invalid medical_history_no format');
+      }
+
+      const patient = await BasicInfo.findOne({ value })
+      if (!patient) {
+        throw new NotFoundError(`no patient with medical_history_no ${value}`)
+      }
+    })
 ]);
 
 //register validation

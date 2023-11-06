@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import moment from "moment-timezone";
 
 const UserSchema = new mongoose.Schema({
   id: Number, //醫生代碼
