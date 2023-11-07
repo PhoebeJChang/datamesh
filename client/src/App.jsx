@@ -15,6 +15,7 @@ import {
   DbsState } from './pages'
 //if the export is 'default'then we don't need {}   
 
+import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
 
 export const checkDefaultTheme = () => {
   //store the local value (string) to check if its 'true'
@@ -56,7 +57,8 @@ const router = createBrowserRouter([
         children:[
           {
             index: true,
-            element:<AddBasicInfo />
+            element:<AddBasicInfo />,
+            action: addBasicInfoAction
           },
           {
             path: 'stats',

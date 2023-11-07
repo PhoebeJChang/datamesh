@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BASICINFO_GENDER } from "../utils/constance";
+import { BASICINFO_GENDER } from "../utils/constance.js";
 
 const BasicInfSchema = new mongoose.Schema({
   medical_history_no: Number,

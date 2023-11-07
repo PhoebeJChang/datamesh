@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-const FormRow = ({type, name, labelText, defaultValue}) => {
+const FormRow = ({type, name, labelText, defaultValue, id}) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
