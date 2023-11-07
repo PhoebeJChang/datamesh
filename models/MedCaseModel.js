@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const BasicInfSchema = new mongoose.Schema(
+const BasicInfSchema = new mongoose.Schema( 
   {
     hospital_id:{
       type: Number,
@@ -74,4 +74,4 @@ BasicInfSchema.pre("updateOne", function(next) {
   next();
 });
 
-export default mongoose.model('basic_inf', BasicInfSchema);
+export default mongoose.model('MedCase', BasicInfSchema);

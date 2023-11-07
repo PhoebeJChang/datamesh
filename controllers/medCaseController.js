@@ -3,7 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 
 //Get all cases
 export const getAllMedCases = async (req, res) => {
-  const medCases = await MedCase.find({});
+  console.log(req.query)
+  const medCases = await MedCase.find({
+    patient_gender: req.query.search
+  });
   res.status(StatusCodes.OK).json({ medCases });
 };
 

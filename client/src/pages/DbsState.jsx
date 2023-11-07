@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
+import dataMed from '../baslic_inf.json'
 
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
@@ -12,14 +13,30 @@ const DbsState = () => {
 
   // Each Column Definition results in one Column.
   const [columnDefs, setColumnDefs] = useState([
-    { field: 'make', filter: true },
-    { field: 'model', filter: true },
-    { field: 'price' }
+    
+    { headerName: 'Hospital ID', field: 'hospital_id', filter: true },
+    { headerName: 'Hospital Name', field: 'hospital_name', filter: true },
+    { headerName: '病歷號碼', field: 'chart_no' } ,
+    { headerName: 'Name', field: 'patient_name' } ,
+    { headerName: 'Gender', field: 'patient_gender' } ,
+    { headerName: '身分證字號', field: 'id_number' } ,
+    { headerName: '生日', field: 'birth_date' } ,
+    { headerName: '出生地', field: 'birth_place' } ,
+    { headerName: '體重', field: 'weight' } ,
+    { headerName: '地址', field: 'current_address' } ,
+    { headerName: '職業', field: 'profession' } ,
+    { headerName: '工作單位', field: 'work_unit' } ,
+    { headerName: '聯絡資料', field: 'contact_information' } ,
+    { headerName: '入院時間', field: 'admitting_time' } ,
+    { headerName: '歷史病歷', field: 'history_recorder' } ,
+    { headerName: 'Timestamp', field: 'ts' } ,
+    
   ]);
 
   // DefaultColDef sets props common to all Columns
   const defaultColDef = useMemo(() => ({
-    sortable: true
+    sortable: true,
+    editable: true,
   }));
 
   // Example of consuming Grid Event
@@ -27,12 +44,12 @@ const DbsState = () => {
     console.log('cellClicked', event);
   }, []);
 
-  // Example load data from server
-  useEffect(() => {
-    fetch('https://www.ag-grid.com/example-assets/row-data.json')
-      .then(result => result.json())
-      .then(rowData => setRowData(rowData))
-  }, []);
+  // // Example load data from server
+  // useEffect(() => {
+  //   fetch('baslic_inf.json')
+  //     .then(result => result.json())
+  //     .then(rowData => setRowData(rowData))
+  // }, []);
 
   // Example using Grid's API
   const buttonListener = useCallback(e => {
@@ -63,14 +80,14 @@ const DbsState = () => {
         <AgGridReact
           ref={gridRef} // Ref for accessing Grid's API
 
-          rowData={rowData} // Row Data for Rows
+          rowData={dataMed} // Row Data for Rows
 
           columnDefs={columnDefs} // Column Defs for Columns
           defaultColDef={defaultColDef} // Default Column Properties
 
           animateRows={true} // Optional - set to 'true' to have rows animate when sorted
           rowSelection='multiple' // Options - allows click selection of rows
-
+          pagination={true}
           onCellClicked={cellClickedListener} // Optional - registering for Grid Event
         />
       </div>
@@ -93,14 +110,14 @@ const DbsState = () => {
           <AgGridReact
             ref={gridRef} // Ref for accessing Grid's API
 
-            rowData={rowData} // Row Data for Rows
+            rowData={dataMed} // Row Data for Rows
 
             columnDefs={columnDefs} // Column Defs for Columns
             defaultColDef={defaultColDef} // Default Column Properties
 
             animateRows={true} // Optional - set to 'true' to have rows animate when sorted
             rowSelection='multiple' // Options - allows click selection of rows
-
+            pagination={true}
             onCellClicked={cellClickedListener} // Optional - registering for Grid Event
           />
         </div>
@@ -125,14 +142,14 @@ const DbsState = () => {
           <AgGridReact
             ref={gridRef} // Ref for accessing Grid's API
 
-            rowData={rowData} // Row Data for Rows
+            rowData={dataMed} // Row Data for Rows
 
             columnDefs={columnDefs} // Column Defs for Columns
             defaultColDef={defaultColDef} // Default Column Properties
 
             animateRows={true} // Optional - set to 'true' to have rows animate when sorted
             rowSelection='multiple' // Options - allows click selection of rows
-
+            pagination={true}
             onCellClicked={cellClickedListener} // Optional - registering for Grid Event
           />
         </div>

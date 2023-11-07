@@ -39,14 +39,14 @@ export const validateMedCaseInput = withValidationErrors([
   body('id_number').notEmpty().withMessage('id number is required'),
   body('birth_date').notEmpty().withMessage('birth date is required'),
   body('birth_place').notEmpty().withMessage('birth place is required'),
-  body('weight').notEmpty().withMessage(' is required'),
-  body('current_address').notEmpty().withMessage(' is required'),
-  body('profession').notEmpty().withMessage(' is required'),
-  body('work_unit').notEmpty().withMessage(' is required'),
-  body('contact_information').notEmpty().withMessage(' is required'),
-  body('admitting_time').notEmpty().withMessage(' is required'),
-  body('inf_recording_time').notEmpty().withMessage(' is required'),
-  body('history_recorder').notEmpty().withMessage(' is required'),
+  body('weight').notEmpty().withMessage('weight is required'),
+  body('current_address').notEmpty().withMessage('current_address is required'),
+  body('profession').notEmpty().withMessage('profession is required'),
+  body('work_unit').notEmpty().withMessage('work unit is required'),
+  body('contact_information').notEmpty().withMessage('contact_information is required'),
+  body('admitting_time').notEmpty().withMessage('admitting_time is required'),
+  // body('inf_recording_time').notEmpty().withMessage('inf_recording_time is required'),
+  body('history_recorder').notEmpty().withMessage('history_recorder is required'),
 ]);
 
 export const validateIdParams = withValidationErrors([
