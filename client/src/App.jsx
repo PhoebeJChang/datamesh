@@ -7,6 +7,7 @@ import {
   Landing, 
   Error, 
   AddMedCase, 
+  AddBasicInfo,
   Stats, 
   AllPatients, 
   Profile, 
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         children:[
           {
             index: true,
-            element:<AddMedCase />
+            element:<AddBasicInfo />
           },
           {
             path: 'stats',
