@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const BasicInfSchema = new mongoose.Schema({
   medical_history_no: Number,
-  id_number: Number, 
+  id_number: String, 
   name: String,
   gender: {
       type: String,
@@ -22,4 +22,4 @@ const BasicInfSchema = new mongoose.Schema({
 }
 );
 
-export default mongoose.model('MedCase', BasicInfSchema);
+export default mongoose.model('basic_infos', BasicInfSchema);
