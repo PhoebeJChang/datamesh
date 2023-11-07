@@ -12,6 +12,7 @@ const FormRow = ({type, name, labelText, defaultValue}) => {
         className="form-input"
         defaultValue={defaultValue || ''}
         required
+        readOnly = {false}
       />
     </div>
   )

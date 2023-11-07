@@ -54,7 +54,7 @@ const DashboardLayout = () => {
 
             {/* where our entire content should be */}
             <div className="dashboard-page">
-              <Outlet />
+              <Outlet context={{ user }} />
             </div>
 
           </div>

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { BASICINFO_GENDER } from "../utils/constance";
 
 const BasicInfSchema = new mongoose.Schema({
   medical_history_no: Number,
@@ -6,7 +7,8 @@ const BasicInfSchema = new mongoose.Schema({
   name: String,
   gender: {
       type: String,
-      enum: ['男', '女', '其他']
+      enum: Object.values(BASICINFO_GENDER),
+      default: BASICINFO_GENDER.MALE
   }, 
   birth_date: Date, 
   height: Number,
