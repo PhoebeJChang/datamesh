@@ -5,7 +5,7 @@
 
 import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 import MedCase from '../models/MedCaseModel.js';
 import User from '../models/UserModel.js'
 import BasicInfo from '../models/BasicInfoModel.js';
@@ -36,7 +36,11 @@ export const validateBasicInfoInput  = withValidationErrors([
   body('medical_history_no')
     .notEmpty()
     .withMessage('medical history number is required')
-    .isLength(8)
+    .isLength({
+      min: 8,
+      max: 8
+    })
+    .withMessage('invalid medical history number format')
     .isNumeric()
     .withMessage('invalid medical history number format')
     //check the id is unique or not
@@ -122,7 +126,11 @@ export const validateBasicInfoInput  = withValidationErrors([
     body('medical_history_no')
       .notEmpty()
       .withMessage('medical history number is required')
-      .isLength(8)
+      .isLength({
+        min: 8,
+        max: 8
+      })
+      .withMessage('invalid medical history number format')
       .isNumeric()
       .withMessage('invalid medical history number format')
       //check the id is unique or not
@@ -136,7 +144,10 @@ export const validateBasicInfoInput  = withValidationErrors([
     body('id_number')
     .notEmpty()
     .withMessage('id number is required')
-    .isLength(10)
+    .isLength({
+      min: 10,
+      max: 10
+    })
     .withMessage('invalid id number format')
     //check the id is unique or not
     .custom(async (id_number) => {
@@ -206,32 +217,36 @@ export const validateBasicInfoInput  = withValidationErrors([
 
 export const validateIdParams = withValidationErrors([
   param('id')
-    .custom(async (value) => {
-      const isValidId = param.isLength(6).isNumeric()
-      if (!isValidId) {
-        throw new BadRequestError('Invalid id format');
-      }
-
-      const user = await User.findOne({ value })
-      if (!user) {
-        throw new NotFoundError(`no user with id ${value}`)
-      }
+    .isLength({
+      min: 6,
+      max: 6
     })
+    .withMessage('invalid id format')
+    .isNumeric()
+    .withMessage('invalid id format')
+    .custom(async (id) => {
+      const user = await BasicInfo.findOne({ id })
+      if (!user) {
+        throw new NotFoundError(`no patient with medical_history_no ${id}`)
+      }
+  })
 ]);
 
 export const validateMDParams = withValidationErrors([
   param('medical_history_no')
-    .custom(async (value) => {
-      const isValidId = param.isLength(8).isNumeric()
-      if (!isValidId) {
-        throw new BadRequestError('Invalid medical_history_no format');
-      }
-
-      const patient = await BasicInfo.findOne({ value })
-      if (!patient) {
-        throw new NotFoundError(`no patient with medical_history_no ${value}`)
-      }
+    .isLength({
+      min: 8,
+      max: 8
     })
+    .withMessage('invalid medical history number format')
+    .isNumeric()
+    .withMessage('invalid medical history number format')
+    .custom(async (medical_history_no) => {
+      const patient = await BasicInfo.findOne({ medical_history_no })
+      if (!patient) {
+        throw new NotFoundError(`no patient with medical_history_no ${medical_history_no}`)
+      }
+  })
 ]);
 
 //register validation
@@ -239,7 +254,11 @@ export const validateRegisterInput = withValidationErrors([
   body('id')
     .notEmpty()
     .withMessage('id is required')
-    .isLength(6)
+    .isLength({
+      min: 6,
+      max: 6
+    })
+    .withMessage('invalid id format')
     .isNumeric()
     .withMessage('invalid id format')
     //check the id is unique or not
@@ -290,8 +309,6 @@ export const validateRegisterInput = withValidationErrors([
   body('password')
     .notEmpty()
     .withMessage('password is required')
-    // .isLength({ min: 8 })
-    // .withMessage('password must be atleast 8 character long')
     .isStrongPassword({
       minLength: 8,
       minUppercase: 1,
@@ -311,7 +328,11 @@ export const validateLoginInput = withValidationErrors([
   body('id')
     .notEmpty()
     .withMessage('id is required')
-    .isLength(6)
+    .isLength({
+      min: 6,
+      max: 6
+    })
+    .withMessage('invalid id format')
     .isNumeric()
     .withMessage('invalid id format'),
     
