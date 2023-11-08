@@ -8,28 +8,6 @@ const UserSchema = new mongoose.Schema({
   birthday: Date,
   gender: {
     type: String,
-<<<<<<< HEAD
-    enum: ['user', 'admin'],
-    default: 'user'
-  },
-  // Department: String,
-  // gender: {
-  //   type: String,
-  //   enum: ['男', '女'],
-  //   default: '男'
-  // },
-  createdAt: {
-    type: Date,
-    default: dateTaipei
-  },
-  updatedAt: {
-    type: Date,
-    default: dateTaipei
-  }
-});
-
-export default mongoose.model('User', UserSchema);
-=======
     enum: ['男', '女', '其他']
   }, 
   department: {
@@ -59,4 +37,3 @@ export default mongoose.model('User', UserSchema);
 );
 
 export default mongoose.model('users', UserSchema)
->>>>>>> ad3eb81229481ee0b9bdf2768f2029e14fcb845e
