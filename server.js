@@ -2,12 +2,12 @@ import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import express from 'express'
 import morgan from 'morgan';
-import jobRouter from './routes/jobRouter.js'
 import mongoose from 'mongoose';
 import { body, validationResult } from 'express-validator';
 //routers
 import medCaseRouter from './routes/medCaseRouter.js'
 import authRouter from './routes/authRouter.js';
+import basicInfoRouter from './routes/basicInfoRouter.js';
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import mysql from 'mysql';
@@ -81,6 +81,9 @@ app.get('/', (req, res) => {
 //宣告要的router files
 app.use('/api/v1/medCases', medCaseRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/basicInfo', basicInfoRouter);
+
+
 
 //any method, all the urls
 //everytime the user trying to access some kinf of resource that we don't have on our server
