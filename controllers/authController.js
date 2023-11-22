@@ -31,19 +31,25 @@ export const login = async (req, res) => {
     throw new UnauthenticatedError('醫師編號不存在或註冊')
   }
 
-  const hashedPassword = (await User.findOne({ id: req.body.id }, 'password')).password;
-  const checkedRes = await checkPassword(req.body.password, hashedPassword);
-  if (checkedRes) {
-    res.status(StatusCodes.OK).json({ msg: '登入成功' });
-  }
-  else {
+  const checkedRes = await checkPassword(req.body.password, user.password);
+  if (!checkedRes) {
     res.status(StatusCodes.UNAUTHORIZED).json({ msg: '登入失敗:密碼錯誤' });
   }
 
-  const token = createJWT({ userId: user._id, department: user.department });
+  const token = createJWT({ userId: user.id });
 
-  
+  // set the token expire time
+  const twoDay = 1000 * 60 * 60 * 24 * 2;
+
+  res.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + twoDay),
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  res.status(StatusCodes.CREATED).json({ msg: '登入成功' });
 }
+
 
 export const getAllUsers = async (req, res) => {
   const basicInfos = await User.find({});

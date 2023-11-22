@@ -50,7 +50,7 @@ const AddBasicInfo = () => {
           <FormRow type='phone' labelText='手機號碼' name='phone' id='phone'/>
           <FormRow type='email' labelText='電子郵件' name='email' id='email'/>
           <FormRow type='profession' labelText='職業' name='profession' id='profession'/>
-          <FormRow readOnly={true} defaultValue={user.name} labelText='資料新增者' name='history_recorder' id='history_recorder'/>
+          {/* <FormRow readOnly={true} defaultValue={user.id} labelText='資料新增者ID' name='history_recorder' id='history_recorder'/> */}
 
           <button
             type='submit'

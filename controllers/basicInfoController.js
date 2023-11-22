@@ -3,13 +3,17 @@ import { StatusCodes } from 'http-status-codes';
 
 //Get all BasicInfo
 export const getAllBasicInfos = async (req, res) => {
-  const basicInfos = await BasicInfo.find({});
+  // console.log(req)
+  // find({ history_recorder: req.user.userId })
+  const basicInfos = await BasicInfo.find({ });
   res.status(StatusCodes.OK).json({ basicInfos });
 };
 
 //create BasicInfo
 export const createBasicInfo = async (req, res) => {
   //it should follow the schema in BasicInfoModel
+  console.log("reqqq", req.user)
+  req.body.history_recorder = req.user.userId;
   const basicInfo = await BasicInfo.create(req.body);
   res.status(StatusCodes.CREATED).json({ msg: 'Patient Created'});
 }

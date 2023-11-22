@@ -116,10 +116,11 @@ export const validateBasicInfoInput  = withValidationErrors([
   body('profession')
     .notEmpty()
     .withMessage('profession is required'),
-
+  
+  //NEED TO CHANGE LATER (changed)
   body('history_recorder')
-    .notEmpty()
-    .withMessage('history recorder is required')
+    // .notEmpty()
+    // .withMessage('history recorder is required')
   ]);
 
   export const validateMedCaseInput  = withValidationErrors([
