@@ -1,7 +1,7 @@
 // import React from 'react'
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import { Link } from "react-router-dom";
-import { BASICINFO_GENDER } from '../../../utils/constance.js';
+import { BASICINFO_GENDER, DEPARTMENT } from '../../../utils/constance.js';
 import { FormRow, Logo, FormRowSelect } from "../components";
 
 const Register = () => {
@@ -41,10 +41,11 @@ const Register = () => {
             defaultValue={BASICINFO_GENDER.MALE}
             list={Object.values(BASICINFO_GENDER)}
           />
-				<FormRow
+				<FormRowSelect
 					type="string"
 					name='department'
 					labelText='科別'
+					list={Object.values(DEPARTMENT)}
 				/>
 				<FormRow
 					type="password"
