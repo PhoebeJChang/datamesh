@@ -62,11 +62,11 @@ try {
 
 //respond to get request, query will move later
 app.get('/', (req, res) => {
-  // res.send('Hello');
-  mysql_config.query("select * from accounts", function (err, result) {
-    if (err) throw err;
-    res.send("Result: " + JSON.stringify(result));
-  });
+  res.send('Hello');
+  // mysql_config.query("select * from accounts", function (err, result) {
+  //   if (err) throw err;
+  //   res.send("Result: " + JSON.stringify(result));
+  // });
 });
 
 //temporaly dont need it
