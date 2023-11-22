@@ -10,6 +10,7 @@ import { body, validationResult } from 'express-validator';
 import medCaseRouter from './routes/medCaseRouter.js'
 import authRouter from './routes/authRouter.js';
 import basicInfoRouter from './routes/basicInfoRouter.js';
+import userRouter from './routes/userRouter.js';
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
@@ -81,9 +82,11 @@ app.get('/api/v1/test', (req, res) => {
 //!!!!!!!!!!!!!!!!!!!!!!!!!
 //宣告要的router files
 app.use('/api/v1/medCases', medCaseRouter);
-app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
+app.use('/api/v1/auth', authRouter);
 
+//for admin pages (not yet created)
+app.use('/api/v1/users', authenticateUser, userRouter);
 
 //any method, all the urls
 //everytime the user trying to access some kinf of resource that we don't have on our server
