@@ -47,7 +47,7 @@ const AddBasicInfo = () => {
           <FormRow type='number' labelText='身高' name='height' id='height' />
           <FormRow type='number' labelText='體重' name='weight' id='weight' />
           <FormRow type='text' labelText='現居地址' name='address' id='address' />
-          <FormRow type='phone' labelText='手機號碼' name='phone' id='phone'/>
+          <FormRow type='number' labelText='手機號碼' name='phone' id='phone'/>
           <FormRow type='email' labelText='電子郵件' name='email' id='email'/>
           <FormRow type='profession' labelText='職業' name='profession' id='profession'/>
           {/* <FormRow readOnly={true} defaultValue={user.id} labelText='資料新增者ID' name='history_recorder' id='history_recorder'/> */}

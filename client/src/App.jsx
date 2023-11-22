@@ -15,6 +15,7 @@ import {
   DbsState } from './pages'
 //if the export is 'default'then we don't need {}   
 
+import { action as registerAction } from "./pages/Register";
 import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
 
 export const checkDefaultTheme = () => {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
+        action: registerAction
       },
       {
         path: 'login',
