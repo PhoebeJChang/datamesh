@@ -16,6 +16,7 @@ import {
 //if the export is 'default'then we don't need {}   
 
 import { action as registerAction } from "./pages/Register";
+import { action as loginAction } from "./pages/Login";
 import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
 
 export const checkDefaultTheme = () => {
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+        action: loginAction
       },
       {
         // add the child pages wihich connect to the dashboard pages
