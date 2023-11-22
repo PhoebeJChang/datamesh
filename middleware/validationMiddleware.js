@@ -32,7 +32,7 @@ const withValidationErrors = (validateValues) => {
 /**************************
  * Medcase validators
  **************************/
-export const validateBasicInfoInput  = withValidationErrors([
+export const validateBasicInfoInput = withValidationErrors([
   body('medical_history_no')
     .notEmpty()
     .withMessage('medical history number is required')
@@ -45,24 +45,24 @@ export const validateBasicInfoInput  = withValidationErrors([
     .withMessage('invalid medical history number format')
     //check the id is unique or not
     .custom(async (medical_history_no) => {
-     const patient_medical = await BasicInfo.findOne({ medical_history_no })
+      const patient_medical = await BasicInfo.findOne({ medical_history_no })
       if (patient_medical) {
         throw new BadRequestError('medical history number already exists');
       }
-  }),
+    }),
 
   body('id_number')
-  .notEmpty()
-  .withMessage('id number is required')
-  .isLength(10)
-  .withMessage('invalid id number format')
-  //check the id is unique or not
-  .custom(async (id_number) => {
-    const patient_id = await BasicInfo.findOne({ id_number })
-    if (patient_id) {
-      throw new BadRequestError('id number already exists');
-    }
-  }),
+    .notEmpty()
+    .withMessage('id number is required')
+    .isLength(10)
+    .withMessage('invalid id number format')
+    //check the id is unique or not
+    .custom(async (id_number) => {
+      const patient_id = await BasicInfo.findOne({ id_number })
+      if (patient_id) {
+        throw new BadRequestError('id number already exists');
+      }
+    }),
 
   body('name')
     .notEmpty()
@@ -116,33 +116,33 @@ export const validateBasicInfoInput  = withValidationErrors([
   body('profession')
     .notEmpty()
     .withMessage('profession is required'),
-  
+
   //NEED TO CHANGE LATER (changed)
   body('history_recorder')
-    // .notEmpty()
-    // .withMessage('history recorder is required')
-  ]);
+  // .notEmpty()
+  // .withMessage('history recorder is required')
+]);
 
-  export const validateMedCaseInput  = withValidationErrors([
-    body('medical_history_no')
-      .notEmpty()
-      .withMessage('medical history number is required')
-      .isLength({
-        min: 8,
-        max: 8
-      })
-      .withMessage('invalid medical history number format')
-      .isNumeric()
-      .withMessage('invalid medical history number format')
-      //check the id is unique or not
-      .custom(async (medical_history_no) => {
-       const patient_medical = await User.findOne({ medical_history_no })
-        if (patient_medical) {
-          throw new BadRequestError('medical history number already exists');
-        }
+export const validateMedCaseInput = withValidationErrors([
+  body('medical_history_no')
+    .notEmpty()
+    .withMessage('medical history number is required')
+    .isLength({
+      min: 8,
+      max: 8
+    })
+    .withMessage('invalid medical history number format')
+    .isNumeric()
+    .withMessage('invalid medical history number format')
+    //check the id is unique or not
+    .custom(async (medical_history_no) => {
+      const patient_medical = await User.findOne({ medical_history_no })
+      if (patient_medical) {
+        throw new BadRequestError('medical history number already exists');
+      }
     }),
-  
-    body('id_number')
+
+  body('id_number')
     .notEmpty()
     .withMessage('id number is required')
     .isLength({
@@ -157,64 +157,64 @@ export const validateBasicInfoInput  = withValidationErrors([
         throw new BadRequestError('id number already exists');
       }
     }),
-  
-    body('name')
-      .notEmpty()
-      .withMessage('name is required'),
-  
-    body('gender')
-      .notEmpty()
-      .withMessage('gender is required'),
-  
-    body('birth_date')
-      .notEmpty()
-      .withMessage('birth date is required')
-      .isDate()
-      .withMessage('invalid birthday format'),
-  
-    body('height')
-      .notEmpty()
-      .withMessage('height is required')
-      .isNumeric()
-      .withMessage('invalid height format'),
-  
-    body('weight')
-      .notEmpty()
-      .withMessage('weight is required')
-      .isNumeric()
-      .withMessage('invalid weight format'),
-  
-    body('address')
-      .notEmpty()
-      .withMessage('address is required'),
-  
-    body('phone')
-      .notEmpty()
-      .withMessage('phone is required')
-      .isMobilePhone('zh-TW')
-      .withMessage('invalid phone format'),
-  
-    body('email')
-      .notEmpty()
-      .withMessage('email is required')
-      .isEmail()
-      .withMessage('invalid email format')
-      //check the email is unique or not
-      .custom(async (email) => {
-        const user_email = await User.findOne({ email })
-        if (user_email) {
-          throw new BadRequestError('email already exists');
-        }
-      }),
-  
-    body('profession')
-      .notEmpty()
-      .withMessage('profession is required'),
-  
-    body('history_recorder')
-      .notEmpty()
-      .withMessage('history recorder is required')
-    ]);
+
+  body('name')
+    .notEmpty()
+    .withMessage('name is required'),
+
+  body('gender')
+    .notEmpty()
+    .withMessage('gender is required'),
+
+  body('birth_date')
+    .notEmpty()
+    .withMessage('birth date is required')
+    .isDate()
+    .withMessage('invalid birthday format'),
+
+  body('height')
+    .notEmpty()
+    .withMessage('height is required')
+    .isNumeric()
+    .withMessage('invalid height format'),
+
+  body('weight')
+    .notEmpty()
+    .withMessage('weight is required')
+    .isNumeric()
+    .withMessage('invalid weight format'),
+
+  body('address')
+    .notEmpty()
+    .withMessage('address is required'),
+
+  body('phone')
+    .notEmpty()
+    .withMessage('phone is required')
+    .isMobilePhone('zh-TW')
+    .withMessage('invalid phone format'),
+
+  body('email')
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('invalid email format')
+    //check the email is unique or not
+    .custom(async (email) => {
+      const user_email = await User.findOne({ email })
+      if (user_email) {
+        throw new BadRequestError('email already exists');
+      }
+    }),
+
+  body('profession')
+    .notEmpty()
+    .withMessage('profession is required'),
+
+  body('history_recorder')
+    .notEmpty()
+    .withMessage('history recorder is required')
+]);
 
 export const validateIdParams = withValidationErrors([
   param('id')
@@ -230,7 +230,7 @@ export const validateIdParams = withValidationErrors([
       if (!user) {
         throw new NotFoundError(`no patient with medical_history_no ${id}`)
       }
-  })
+    })
 ]);
 
 export const validateMDParams = withValidationErrors([
@@ -247,7 +247,7 @@ export const validateMDParams = withValidationErrors([
       if (!patient) {
         throw new NotFoundError(`no patient with medical_history_no ${medical_history_no}`)
       }
-  })
+    })
 ]);
 
 /**************************
@@ -270,7 +270,7 @@ export const validateRegisterInput = withValidationErrors([
       if (user_id) {
         throw new BadRequestError('id already exists');
       }
-  }),
+    }),
 
   body('name')
     .notEmpty()
@@ -341,8 +341,52 @@ export const validateLoginInput = withValidationErrors([
     .withMessage('醫師編號須為6碼')
     .isNumeric()
     .withMessage('錯誤的格式'),
-    
+
   body('password')
     .notEmpty()
     .withMessage('請輸入密碼')
 ])
+
+/**************************
+ * Update user validation (almost the same as register)
+ **************************/
+export const validateUpdateUserInput = withValidationErrors([
+
+  body('name')
+    .notEmpty()
+    .withMessage('name is required'),
+
+  body('phone')
+    .notEmpty()
+    .withMessage('phone is required')
+    .isMobilePhone('zh-TW')
+    .withMessage('invalid phone format'),
+
+  body('birthday')
+    .notEmpty()
+    .withMessage('birthday is required')
+    .isDate()
+    .withMessage('invalid birthday format'),
+
+  body('email')
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('invalid email format')
+    //check the email is unique or not
+    .custom(async (email, { req }) => {
+      const user = await User.findOne({ email })
+      // need to double check
+      if (user && user.id !== req.user.userId) {
+        throw new BadRequestError('email already exists');
+      }
+    }),
+
+  body('gender')
+    .notEmpty()
+    .withMessage('gender is required'),
+
+  body('department')
+    .notEmpty()
+    .withMessage('department is required'),
+]);
