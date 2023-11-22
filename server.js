@@ -1,8 +1,10 @@
+
 import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import express from 'express'
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 import { body, validationResult } from 'express-validator';
 //routers
 import medCaseRouter from './routes/medCaseRouter.js'
@@ -10,27 +12,26 @@ import authRouter from './routes/authRouter.js';
 import basicInfoRouter from './routes/basicInfoRouter.js';
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
+import { authenticateUser } from './middleware/authMiddleware.js';
 import mysql from 'mysql';
 import mssql from 'mssql';
 dotenv.config();
 const app = express();
-
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-app.use(morgan('dev'));
 
+app.use(cookieParser());
 app.use(express.json());
-
 const port = process.env.PORT || 5100;
 
-const mysql_config = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: "datamesh"
-})
-
+/*MYSQL註解掉的地方*/
+// const mysql_config = mysql.createConnection({
+//   host: process.env.MYSQL_HOST,
+//   user: process.env.MYSQL_USER,
+//   password: process.env.MYSQL_PASSWORD,
+//   database: "datamesh"
+// })
 const azure_config = {
   user: process.env.AZURE_USER,
   password: process.env.AZURE_PASSWORD,
@@ -38,37 +39,35 @@ const azure_config = {
   port: 1433,
   database: 'datamesh',
   authentication: {
-      type: 'default'
+    type: 'default'
   },
   options: {
-      encrypt: true
+    encrypt: true
   }
 }
-
 try {
   await mongoose.connect(process.env.MONGO_URL)
-  mysql_config.connect(function(err) {
-    if (err) throw err;
-  });
+  /*MYSQL註解掉的地方*/
+  // mysql_config.connect(function(err) {
+  //   if (err) throw err;
+  // });
   mssql.connect(azure_config);
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
   });
-  
+
 } catch (error) {
   console.log(error);
   process.exit(1);
 }
-
 //respond to get request, query will move later
 app.get('/', (req, res) => {
-  res.send('Hello');
-  // mysql_config.query("select * from accounts", function (err, result) {
-  //   if (err) throw err;
-  //   res.send("Result: " + JSON.stringify(result));
-  // });
+  // res.send('Hello');
+  mysql_config.query("select * from accounts", function (err, result) {
+    if (err) throw err;
+    res.send("Result: " + JSON.stringify(result));
+  });
 });
-
 //temporaly dont need it
 // app.post('/api/v1/test',
 //   validateTest,
@@ -76,13 +75,14 @@ app.get('/', (req, res) => {
 //     const { name } = req.body;
 //     res.json({ message: `hello ${name}` });
 //   })
-
+app.get('/api/v1/test', (req, res) => {
+  res.json({ msg: 'test route' });
+});
 //!!!!!!!!!!!!!!!!!!!!!!!!!
 //宣告要的router files
 app.use('/api/v1/medCases', medCaseRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/basicInfo', basicInfoRouter);
-
+app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
 
 
 //any method, all the urls
@@ -91,7 +91,6 @@ app.use('/api/v1/basicInfo', basicInfoRouter);
 app.use('*', (req, res) => {
   res.status(404).json({ msg: 'not found' });
 });
-
 //not found and error rout
 // get trigger by the existing rout
 app.use(errorHandlerMiddleware);
