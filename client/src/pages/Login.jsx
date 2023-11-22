@@ -36,7 +36,7 @@ export const Login = () => {
 				>
 					{isSubmitting ? 'submitting...' : 'login'}
 				</button>
-				<button type='button' className='btn btn-block'>Explore the app</button>
+				{/* <button type='button' className='btn btn-block'>Explore the app</button> */}
 
 				<p>
 					Don&apos;t have an account?
