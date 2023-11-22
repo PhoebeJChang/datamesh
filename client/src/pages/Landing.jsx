@@ -19,10 +19,7 @@ const Landing = () => {
 						Distributed <span>Data</span> Streaming
 					</h1>
 					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Sapiente veritatis incidunt recusandae obcaecati similique voluptatum
-						labore nostrum quaerat deserunt ad, excepturi velit qui nisi eius soluta.
-						Rem pariatur cumque libero.
+						112 學年度畢業專題 A01組 -- DATAMESH 技術
 					</p>
 					<Link to="/register" className='btn register-link'>
 						Register

@@ -73,7 +73,7 @@ const DbsState = () => {
       {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
       <div className="ag-theme-alpine" style={{
         width: '100%',
-        height: 500,
+        height: 550,
         justifyContent: 'center',
       }}>
 
@@ -103,7 +103,7 @@ const DbsState = () => {
         </div>
         <div className="ag-theme-alpine" style={{
           width: '100%',
-          height: 500,
+          height: 550,
           justifyContent: 'center',
         }}>
 
@@ -135,7 +135,7 @@ const DbsState = () => {
         </div>
         <div className="ag-theme-alpine" style={{
           width: '100%',
-          height: 500,
+          height: 550,
           justifyContent: 'center',
         }}>
 

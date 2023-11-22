@@ -8,13 +8,13 @@ import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 
 export const action = async ({ request }) => {
-  const formData = await request.formData()
-  const data = Object.fromEntries(formData)
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
   console.log('HIII', data)
   try {
     await customFetch.post('/basicInfo', data);
     toast.success('基本資料新增成功');
-    return true;
+    return redirect('all-patients');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;

@@ -23,16 +23,16 @@ const links = [
     path: 'dbs-state', 
     icon: <MdQueryStats />,
   },
-  {
-    text: 'stats', 
-    path: 'stats', 
-    icon: <IoBarChartSharp />,
-  },
-  {
-    text: 'profile', 
-    path: 'profile', 
-    icon: <ImProfile />,
-  },
+  // {
+  //   text: 'stats', 
+  //   path: 'stats', 
+  //   icon: <IoBarChartSharp />,
+  // },
+  // {
+  //   text: 'profile', 
+  //   path: 'profile', 
+  //   icon: <ImProfile />,
+  // },
   {
     text: 'admin', 
     path: 'admin', 
