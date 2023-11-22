@@ -18,6 +18,7 @@ import {
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
+import { loader as  dashboardLoader} from "./pages/DashboardLayout";
 
 export const checkDefaultTheme = () => {
   //store the local value (string) to check if its 'true'
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
         // add the child pages wihich connect to the dashboard pages
         path: 'dashboard',
         element: <DashboardLayout />,
+        loader: dashboardLoader,
         children:[
           {
             index: true,

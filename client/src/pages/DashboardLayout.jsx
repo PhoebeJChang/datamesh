@@ -1,17 +1,27 @@
 // import React from 'react'
-
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect, useLoaderData } from 'react-router-dom';
 import Wrapper from "../assets/wrappers/Dashboard";
 import { BigSideBar, NavBar, SmallSideBar } from "../components";
 import { useState, createContext, useContext } from "react";
 import { checkDefaultTheme } from "../App";
+import customFetch from '../utils/customFetch';
+
+export const loader = async () => {
+  try {
+    const { data } = await customFetch('/users/current-user');
+    return data;
+  } catch (error) {
+    return redirect('/');
+  }
+};
+
 
 const DashBoardContext = createContext();
 
 
 const DashboardLayout = () => {
   // temp
-  const user = { name: 'Phoebe' }
+  const { user } = useLoaderData();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
 
