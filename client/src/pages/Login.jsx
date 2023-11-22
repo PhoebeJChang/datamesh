@@ -9,8 +9,8 @@ export const Login = () => {
 			<form className="form">
 				<Logo />
 				<h4>login</h4>
-				<FormRow type="email" name="email" defaultValue="phoebe@gmail.com"/>
-				<FormRow type="password" name="password" defaultValue="secret123"/>
+				<FormRow type="number" name="id" labelText="醫師編號"/>
+				<FormRow type="password" name="password"/>
 				<button type='submit' className='btn btn-block'>Login now</button>
 				<button type='button' className='btn btn-block'>Explore the app</button>
 

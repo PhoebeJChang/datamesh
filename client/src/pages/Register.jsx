@@ -1,7 +1,8 @@
 // import React from 'react'
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import { Link } from "react-router-dom";
-import { FormRow, Logo } from "../components";
+import { BASICINFO_GENDER } from '../../../utils/constance.js';
+import { FormRow, Logo, FormRowSelect } from "../components";
 
 const Register = () => {
 	return (
@@ -10,23 +11,51 @@ const Register = () => {
 				<Logo />
 				<h4>Register</h4>
 				{/* labelText is sth we gonna sent to server */}
-				<FormRow type="text" name='name' defaultValue='who r u' />
+				<FormRow
+					type="number"
+					name='id'
+					labelText='醫師編號'
+				/>
 				<FormRow
 					type="text"
-					name='lastName'
-					labelText='last name'
+					name='name'
+				/>
+				<FormRow
+					type="phone"
+					name='phone'
+					labelText='手機號碼'
+				/>
+				<FormRow
+					type="date"
+					name='birthday'
+					labelText='生日'
 				/>
 				<FormRow
 					type="email"
 					name='email'
 				/>
-				<FormRow type="password" name='password' />
+				<FormRowSelect
+            name='gender'
+            labelText='性別'
+            id='gender'
+            defaultValue={BASICINFO_GENDER.MALE}
+            list={Object.values(BASICINFO_GENDER)}
+          />
+				<FormRow
+					type="string"
+					name='department'
+					labelText='科別'
+				/>
+				<FormRow
+					type="password"
+					name='password'
+				/>
 				<button type="submit" className="btn btn-block">
 					submit
 				</button>
 				<p>
 					Already have an account?
-					<Link to='/login' className="member-btn">
+					<Link to='/login' className="member-btn" labelText='生日'>
 						Login
 					</Link>
 				</p>
