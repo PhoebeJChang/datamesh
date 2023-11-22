@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import User from "../models/UserModel.js";
 import { checkPassword, hashPassword } from "../utils/passwordUtils.js";
 import { UnauthenticatedError } from "../errors/customErrors.js";
+import { createJWT } from "../utils/tokenUtils.js";
 
 
 /**************************
@@ -38,6 +39,10 @@ export const login = async (req, res) => {
   else {
     res.status(StatusCodes.UNAUTHORIZED).json({ msg: '登入失敗:密碼錯誤' });
   }
+
+  const token = createJWT({ userId: user._id, department: user.department });
+
+  
 }
 
 export const getAllUsers = async (req, res) => {
