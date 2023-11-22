@@ -332,16 +332,16 @@ export const validateLoginInput = withValidationErrors([
   //   .withMessage('invalid email format'),
   body('id')
     .notEmpty()
-    .withMessage('id is required')
+    .withMessage('請填寫醫師編號')
     .isLength({
       min: 6,
       max: 6
     })
-    .withMessage('invalid id format')
+    .withMessage('醫師編號須為6碼')
     .isNumeric()
-    .withMessage('invalid id format'),
+    .withMessage('錯誤的格式'),
     
   body('password')
     .notEmpty()
-    .withMessage('password is required')
+    .withMessage('請輸入密碼')
 ])
