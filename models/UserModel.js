@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   name: String,
   phone: Number,
   email: String,
-  birthday: Date,
+  birthday: String,
   gender: {
     type: String,
     enum: ['男', '女', '其他']

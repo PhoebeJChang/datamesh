@@ -10,7 +10,7 @@ const BasicInfSchema = new mongoose.Schema({
       enum: Object.values(BASICINFO_GENDER),
       default: BASICINFO_GENDER.MALE
   }, 
-  birth_date: Date, 
+  birth_date: String, 
   height: Number,
   weight: Number,
   address: String,
