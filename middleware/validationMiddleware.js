@@ -249,7 +249,9 @@ export const validateMDParams = withValidationErrors([
   })
 ]);
 
-//register validation
+/**************************
+ * Register validation
+ **************************/
 export const validateRegisterInput = withValidationErrors([
   body('id')
     .notEmpty()
@@ -319,6 +321,9 @@ export const validateRegisterInput = withValidationErrors([
     .withMessage('invalid password format')
 ])
 
+/**************************
+ * Login validation
+ **************************/
 export const validateLoginInput = withValidationErrors([
   // body('email')
   //   .notEmpty()
