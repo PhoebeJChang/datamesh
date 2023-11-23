@@ -9,13 +9,13 @@ import { MdAdminPanelSettings } from 'react-icons/md';
 const links = [
   {
     //this is the first path so the path should be '.'
-    text: 'add patient', 
+    text: 'add basic info', 
     path: '.', 
     icon: <FaWpforms />,
   },
   {
-    text: 'all patient', 
-    path: 'all-patients', 
+    text: 'all basic info', 
+    path: 'all-basicinfos', 
     icon: <MdQueryStats />,
   },
   {

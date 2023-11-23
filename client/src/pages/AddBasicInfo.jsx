@@ -14,7 +14,7 @@ export const action = async ({ request }) => {
   try {
     await customFetch.post('/basicInfo', data);
     toast.success('基本資料新增成功');
-    return redirect('all-patients');
+    return redirect('all-basicinfos');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
@@ -33,7 +33,7 @@ const AddBasicInfo = () => {
         <h4 className='form-title'>新增基本資料</h4>
         {/* add basic information */}
         <div className='form-center'>
-          <FormRow type='number' labelText='病歷號碼' name='medical_history_no' id='medical_history_no' />
+          <FormRow type='number' labelText='病歷號碼(8碼)' name='medical_history_no' id='medical_history_no' />
           <FormRow type='text' labelText='身分證字號' name='id_number' id='id_number' />
           <FormRow type='text' labelText='姓名' name='name' id='name' />
           <FormRowSelect

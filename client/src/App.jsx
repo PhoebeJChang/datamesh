@@ -9,7 +9,7 @@ import {
   AddMedCase, 
   AddBasicInfo,
   Stats, 
-  AllPatients, 
+  AllBasicInfos, 
   Profile, 
   Admin, 
   DbsState } from './pages'
@@ -71,8 +71,8 @@ const router = createBrowserRouter([
             element: <Stats />,
           },
           {
-            path: 'all-patients',
-            element: <AllPatients />,
+            path: 'all-basicinfos',
+            element: <AllBasicInfos />,
           },
           {
             path: 'dbs-state',

@@ -6,7 +6,7 @@ export { default as Login } from './Login';
 export { default as Error } from './Error';
 export { default as Stats } from './Stats';
 export { default as AllJobs } from './AllJobs';
-export { default as AllPatients } from './AllPatients';
+export { default as AllBasicInfos } from './AllBasicInfos';
 export { default as DbsState } from './DbsState';
 export { default as AddMedCase } from './AddMedCase';
 export { default as AddBasicInfo } from './AddBasicInfo'

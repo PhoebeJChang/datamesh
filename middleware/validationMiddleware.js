@@ -30,7 +30,7 @@ const withValidationErrors = (validateValues) => {
 };
 
 /**************************
- * Medcase validators
+ * BasicInfo validators
  **************************/
 export const validateBasicInfoInput = withValidationErrors([
   body('medical_history_no')
