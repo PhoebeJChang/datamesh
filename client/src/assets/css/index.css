@@ -329,3 +329,17 @@ button:disabled {
   background: #ffeeee;
   color: #d66a6a;
 }
+
+/* GENDER */
+.male {
+  background: #e0e8f9;
+  color: #647acb;
+}
+.female {
+  background: #ffeeee;
+  color: #d66a6a;
+}
+.they{
+  background: #fef3c7;
+  color: #f59e0b;
+}

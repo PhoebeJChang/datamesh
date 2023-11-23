@@ -16,11 +16,19 @@ export const loader = async ({ request }) => {
   }
 };
 
+const AllBasicInfosContext = createContext();
 
 const AllBasicInfos = () => {
+  const { data } = useLoaderData();
   return (
-    <h1>AllBasicInfos Page</h1>
-  )
-}
+    <AllBasicInfosContext.Provider value={{ data }}>
+      <SearchContainer />
+      <BasicInfosContainer />
+    </AllBasicInfosContext.Provider>
+  );
+};
+
+export const useAllBasicInfosContext = () => useContext(AllBasicInfosContext)
+
 
 export default AllBasicInfos

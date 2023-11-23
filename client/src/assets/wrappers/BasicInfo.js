@@ -32,6 +32,7 @@ const Wrapper = styled.article`
     }
     p {
       margin: 0;
+      padding-bottom: 5px;
       text-transform: capitalize;
       letter-spacing: var(--letter-spacing);
       color: var(--text-secondary-color);

@@ -19,6 +19,7 @@ import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
 import { loader as  dashboardLoader} from "./pages/DashboardLayout";
+import { loader as  allBasicInfosLoader} from "./pages/AllBasicInfos";
 
 export const checkDefaultTheme = () => {
   //store the local value (string) to check if its 'true'
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
           {
             path: 'all-basicinfos',
             element: <AllBasicInfos />,
+            loader: allBasicInfosLoader
           },
           {
             path: 'dbs-state',
