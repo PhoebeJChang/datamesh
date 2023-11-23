@@ -11,6 +11,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 day.extend(advancedFormat);
 
 const BasicInfo = ({
+  _id,
   medical_history_no,
   id_number,
   name,
@@ -51,7 +52,7 @@ const BasicInfo = ({
 
       </div>
       <footer className='actions'>
-        <Link className='btn edit-btn'>Edit</Link>
+        <Link to={`../edit-basic/${medical_history_no}`} className='btn edit-btn'>Edit</Link>
         <Form>
           <button type='submit' className='btn delete-btn'>
             Delete

@@ -1,9 +1,10 @@
 // import React from 'react';
 import { IoBarChartSharp } from 'react-icons/io5';
 import { MdQueryStats } from 'react-icons/md';
-import { FaWpforms } from 'react-icons/fa';
+import { FaIdCard, FaPenSquare, FaWpforms } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings } from 'react-icons/md';
+import { BsPencilSquare } from 'react-icons/bs';
 
 //a place where we hold our links/data of sidebar
 const links = [
@@ -16,7 +17,12 @@ const links = [
   {
     text: 'all basic info', 
     path: 'all-basicinfos', 
-    icon: <MdQueryStats />,
+    icon: <FaIdCard />,
+  },
+  {
+    text: 'edit basic Info', 
+    path: 'edit-basic', 
+    icon: <BsPencilSquare />,
   },
   {
     text: 'DBs state', 
@@ -33,11 +39,12 @@ const links = [
   //   path: 'profile', 
   //   icon: <ImProfile />,
   // },
-  {
-    text: 'admin', 
-    path: 'admin', 
-    icon: <MdAdminPanelSettings />,
-  },
+  // {
+  //   text: 'admin', 
+  //   path: 'admin', 
+  //   icon: <MdAdminPanelSettings />,
+  // },
+  
 ];
 
 export default links;

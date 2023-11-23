@@ -14,7 +14,7 @@ const BasicInfosContainer = () => {
   return <Wrapper>
     <div className="basicInfos">
       {basicInfos.map((basicInfo) => {
-        return <BasicInfo key={basicInfo._id} {...basicInfo} />
+        return <BasicInfo key={basicInfo.medical_history_no} {...basicInfo} />
       })}
     </div>
   </Wrapper>

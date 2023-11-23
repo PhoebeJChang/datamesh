@@ -1,25 +1,29 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { 
-  HomeLayout, 
-  Register, 
-  Login, 
-  DashboardLayout, 
-  Landing, 
-  Error, 
-  AddMedCase, 
+import {
+  HomeLayout,
+  Register,
+  Login,
+  DashboardLayout,
+  Landing,
+  Error,
+  AddMedCase,
   AddBasicInfo,
-  Stats, 
-  AllBasicInfos, 
-  Profile, 
-  Admin, 
-  DbsState } from './pages'
+  Stats,
+  AllBasicInfos,
+  Profile,
+  Admin,
+  DbsState,
+  EditBasic
+} from './pages'
 //if the export is 'default'then we don't need {}   
 
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
-import { action as  addBasicInfoAction} from "./pages/AddBasicInfo";
-import { loader as  dashboardLoader} from "./pages/DashboardLayout";
-import { loader as  allBasicInfosLoader} from "./pages/AllBasicInfos";
+import { action as addBasicInfoAction } from "./pages/AddBasicInfo";
+import { loader as dashboardLoader } from "./pages/DashboardLayout";
+import { loader as allBasicInfosLoader } from "./pages/AllBasicInfos";
+import { loader as editBasicLoader } from "./pages/EditBasic";
+import { action as editBasicAction } from "./pages/EditBasic";
 
 export const checkDefaultTheme = () => {
   //store the local value (string) to check if its 'true'
@@ -61,10 +65,10 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <DashboardLayout />,
         loader: dashboardLoader,
-        children:[
+        children: [
           {
             index: true,
-            element:<AddBasicInfo />,
+            element: <AddBasicInfo />,
             action: addBasicInfoAction
           },
           {
@@ -85,8 +89,10 @@ const router = createBrowserRouter([
             element: <Profile />,
           },
           {
-            path: 'admin',
-            element: <Admin />,
+            path: 'edit-basic/:id',
+            element: <EditBasic />,
+            loader: editBasicLoader,
+            action: editBasicAction,
           },
         ]
       },
