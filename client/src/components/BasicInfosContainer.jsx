@@ -1,5 +1,5 @@
 // import React from 'react'
-import BasicInfo from './basicInfo';
+import BasicInfo from './BasicInfo'
 import Wrapper from '../assets/wrappers/BasicInfosContainer'
 import { useAllBasicInfosContext } from '../pages/AllBasicInfos'
 
