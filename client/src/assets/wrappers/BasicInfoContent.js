@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     }
   }
   .basic-text {
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     letter-spacing: var(--letter-spacing);
   }
 `;
