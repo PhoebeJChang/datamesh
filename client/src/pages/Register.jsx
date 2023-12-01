@@ -70,6 +70,7 @@ const Register = () => {
 					list={Object.values(DEPARTMENT)}
 				/>
 				<FormRow
+					labelText='密碼(須包含數字和大小寫，至少8碼)'
 					type="password"
 					name='password'
 				/>
