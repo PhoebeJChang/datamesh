@@ -15,7 +15,6 @@ const BasicInfSchema = new mongoose.Schema({
   phone: Number,
   email: String,
   profession: String,
-  history_recorder: String
 },
 {
   timestamps: true
