@@ -3,18 +3,18 @@ import { validateMedCaseInput, validateIdParams } from '../middleware/validation
 const router = Router();
 
 import {
-  getAllMedCases,
-  createMedCase,
+  // getAllMedCases,
+  // createMedCase,
   getMedCase,
-  updateMedCase,
-  deleteMedCase
+  // updateMedCase,
+  // deleteMedCase
 } from '../controllers/medCaseController.js'
 
-router.route('/').get(getAllMedCases).post(validateMedCaseInput, createMedCase);
+// router.route('/').get(getAllMedCases).post(validateMedCaseInput, createMedCase);
 router
-  .route('/:id_number')
+  .route('/:medical_history_no')
   .get(validateIdParams, getMedCase)
-  .patch(validateMedCaseInput, validateIdParams, updateMedCase)
-  .delete(validateIdParams, deleteMedCase);
+  // .patch(validateMedCaseInput, validateIdParams, updateMedCase)
+  // .delete(validateIdParams, deleteMedCase);
 
 export default router;
