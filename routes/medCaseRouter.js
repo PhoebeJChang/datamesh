@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { validateMedCaseInput, validateIdParams } from '../middleware/validationMiddleware.js';
+import { validateIdParams } from '../middleware/validationMiddleware.js';
 const router = Router();
 
 import {
