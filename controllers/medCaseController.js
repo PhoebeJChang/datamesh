@@ -20,8 +20,16 @@ export const createMedCase = async (req, res) => {
 }
 
 // GET SINGLE medCase
+export const getSingleMedCase = async (req, res) => {
+  console.log(req.params.medical_history_no)
+  const medCase = await MedCase.findOne({medical_history_no: req.params.medical_history_no})  
+ res.status(StatusCodes.OK).json({ medCase }); 
+// res.status(StatusCodes.OK).json({ medCase:req.params.medical_history_no }); 
+}
+
 // get medCase base on id_number
 export const getMedCase = async (req, res) => {
+
   const medCase = await MedCase.findById(req.params.id_number);
 
   console.log(medCase);
