@@ -53,7 +53,7 @@ const BasicInfo = ({
       </div>
       <footer className='actions'>
         <Link to={`../edit-basic/${medical_history_no}`} className='btn edit-btn'>Edit</Link>
-        <Form>
+        <Form method='post' action={`../delete-basic/${medical_history_no}`}>
           <button type='submit' className='btn delete-btn'>
             Delete
           </button>

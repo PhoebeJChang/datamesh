@@ -24,6 +24,7 @@ import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { loader as allBasicInfosLoader } from "./pages/AllBasicInfos";
 import { loader as editBasicLoader } from "./pages/EditBasic";
 import { action as editBasicAction } from "./pages/EditBasic";
+import { action as deleteBasicAction } from "./pages/DeleteBasic";
 
 export const checkDefaultTheme = () => {
   //store the local value (string) to check if its 'true'
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
             loader: editBasicLoader,
             action: editBasicAction,
           },
+          {
+            path: 'delete-basic/:id',
+            action: deleteBasicAction,
+          }
         ]
       },
     ],
