@@ -167,7 +167,7 @@ export const validateMDParams = withValidationErrors([
     .isNumeric()
     .withMessage('invalid medical history number format')
     .custom(async (medical_history_no) => {
-      const patient = await medcases.findOne({ medical_history_no })
+      const patient = await BasicInfo.findOne({ medical_history_no })
       if (!patient) {
         throw new NotFoundError(`no patient with medical_history_no ${medical_history_no}`)
       }
