@@ -14,7 +14,7 @@ router.route('/').get(getAllBasicInfos).post(validateBasicInfoInput, createBasic
 router
   .route('/:medical_history_no')
   .get(validateMDParams, getBasicInfo)
-  .put(validateBasicInfoInput, updateBasicInfo)
+  .patch(updateBasicInfo)
   .delete(validateMDParams, deleteBasicInfo)
 
 export default router;
