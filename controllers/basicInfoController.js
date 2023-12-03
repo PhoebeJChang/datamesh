@@ -7,7 +7,7 @@ export const getAllBasicInfos = async (req, res) => {
   // console.log(req)
   // find({ history_recorder: req.user.userId })
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query) || 4;
+  const limit = parseInt(req.query) || 2;
   const skip = (page - 1) * limit;
   const basicInfos = await BasicInfo.find().skip(skip).limit(limit);
   res.status(StatusCodes.OK).json({ basicInfos });
