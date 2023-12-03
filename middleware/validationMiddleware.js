@@ -140,6 +140,23 @@ export const validateIdParams = withValidationErrors([
     })
 ]);
 
+export const validateMedHISParams = withValidationErrors([
+  param('medical_history_no')
+    .isLength({
+      min: 8,
+      max: 8
+    })
+    .withMessage('invalid id format')
+    .isNumeric()
+    .withMessage('invalid id format')
+    .custom(async (medical_history_no) => {
+      const user = await MedCase.findOne({ medical_history_no })
+      if (!user) {
+        throw new NotFoundError(`no patient with medical_history_no ${medical_history_no}`)
+      }
+    })
+]);
+
 export const validateMDParams = withValidationErrors([
   param('medical_history_no')
     .isLength({

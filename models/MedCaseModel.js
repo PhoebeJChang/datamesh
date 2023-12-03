@@ -1,24 +1,14 @@
 import mongoose from "mongoose";
 
-const BasicInfSchema = new mongoose.Schema({
+const MedCaseSchema = new mongoose.Schema({
   medical_history_no: Number,
-  id_number: Number, 
-  name: String,
-  gender: {
-      type: String,
-      enum: ['男', '女', '其他']
-  }, 
-  birth_date: Date, 
-  height: Number,
-  weight: Number,
-  address: String,
-  phone: Number,
-  email: String,
-  profession: String,
+  chief_complaint: String, 
+  symptoms: String,
+  treatment_process: String,
 },
-{
-  timestamps: true
-}
+// {
+//   timestamps: true
+// }
 );
 
-export default mongoose.model('MedCase', BasicInfSchema);
+export default mongoose.model('medcases', MedCaseSchema);
