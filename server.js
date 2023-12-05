@@ -1,4 +1,3 @@
-
 import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import express from 'express'
@@ -16,8 +15,13 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 import mysql from 'mysql';
 import mssql from 'mssql';
+import cors from 'cors';
 dotenv.config();
 const app = express();
+//跨域請求
+// const cors = require('cors');
+app.use(cors());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }

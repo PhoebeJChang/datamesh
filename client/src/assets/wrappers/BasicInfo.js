@@ -77,6 +77,14 @@ const Wrapper = styled.article`
   .edit-btn {
     margin-right: 0.5rem;
   }
+  .show-btn{
+    height: 30px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 export default Wrapper;
