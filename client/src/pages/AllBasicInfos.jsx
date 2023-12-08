@@ -43,7 +43,7 @@ export const loader = async () => {
 //problem here
 //  useEffect(() => { //callback function
 //   console.log('it is doing useEffect()')
-//  }, []); //if page change, then do the callback function
+//  }, [page]); //if page change, then do the callback function
 
 
 
