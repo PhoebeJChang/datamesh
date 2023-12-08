@@ -66,4 +66,3 @@ export const useAllBasicInfosContext = () => useContext(AllBasicInfosContext)
 
 
 export default AllBasicInfos
-//export default BasicInfoList
