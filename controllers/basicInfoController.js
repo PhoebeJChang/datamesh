@@ -1,3 +1,4 @@
+import { response } from 'express';
 import BasicInfo from '../models/BasicInfoModel.js';
 import { StatusCodes } from 'http-status-codes';
 
@@ -5,7 +6,10 @@ import { StatusCodes } from 'http-status-codes';
 export const getAllBasicInfos = async (req, res) => {
   // console.log(req)
   // find({ history_recorder: req.user.userId })
-  const basicInfos = await BasicInfo.find({ });
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query) || 2;
+  const skip = (page - 1) * limit;
+  const basicInfos = await BasicInfo.find().skip(skip).limit(limit);
   res.status(StatusCodes.OK).json({ basicInfos });
 };
 
