@@ -17,6 +17,7 @@ import {
 } from './pages'
 //if the export is 'default'then we don't need {}   
 
+import Modal from 'react-modal';
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { action as addBasicInfoAction } from "./pages/AddBasicInfo";
