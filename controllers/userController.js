@@ -4,7 +4,7 @@ import BasicInfo from '../models/BasicInfoModel.js';
 
 //get actual user insteadd of token and cookies
 export const getCurrentUser = async (req, res) => {
-  const user = await User.findOne({ id: req.user.userId });
+  const user = await User.findOne({ _id: req.user.userId });
   const userWithoutPassword = user.toJSON();
   res.status(StatusCodes.OK).json({ user: userWithoutPassword });
 };
