@@ -2,7 +2,7 @@
 import React from 'react'
 
 // pass the params we want to pass in 
-const FormRowSelect = ({ name, labelText, list, defaultValue = '' }) => {
+const FormRowSelect = ({ name, labelText, list, defaultValue = '', onChange }) => {
   return (
     <div className="form-row">
       <label htmlFor={name} className='form-label'>
@@ -12,7 +12,10 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = '' }) => {
         name={name}
         id={name}
         className='form-select'
-        defaultValue={defaultValue}>
+        defaultValue={defaultValue}
+        onChange = {onChange}
+      >
+
         {/* can also use <option> to hard code */}
         {/* list initially looks like ==== Object.values(BASICINFO_GENDER) */}
         {list.map((itemValue) => {
