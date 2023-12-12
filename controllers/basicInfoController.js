@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 //Get all BasicInfo
 export const getAllBasicInfos = async (req, res) => {
-  const { search } = req.query;
+  const { search, sort } = req.query;
 
   const queryObject = {
     //only show the info created by the current user
@@ -17,9 +17,18 @@ export const getAllBasicInfos = async (req, res) => {
     ]
   }
 
+  const sortOptions = {
+    ascending: 'medical_history_no',
+    descending: '-medical_history_no',
+    'a-z': 'id_number',
+    'z-a': 'id_number'
+  };
+
+  //if client didn't select specific way, default will
+  const sortKey = sortOptions[sort] || sortOptions.ascending;
+
   // console.log(req.query)
-  const basicInfos = await BasicInfo.find(queryObject).sort('medical_history_no');
-  //use'-medical_history_no', if it is opposite
+  const basicInfos = await BasicInfo.find(queryObject).sort(sortKey);
   res.status(StatusCodes.OK).json({ basicInfos });
 };
 

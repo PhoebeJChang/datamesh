@@ -54,4 +54,13 @@ export const DEPARTMENT ={
   Anesthesiology: "麻醉科",
   Vascular_Medicine: "周邊血管科",
   Traditional_Chinese_Medicine: "中醫科"
-}
+};
+
+export const BASICINFO_SORT_BY = {
+  // ASC = ASCENDING
+  // DES = DESCENDING
+  MED_ASCENDING: 'ascending',
+  MED_DESCENDING: 'descending',
+  ID_NUM_ASC: 'a-z',
+  ID_NUM_DES: 'z-a'
+};
