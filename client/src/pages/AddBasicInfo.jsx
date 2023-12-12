@@ -1,9 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
-import { FormRow, FormRowSelect } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useOutletContext } from 'react-router-dom';
 import { BASICINFO_GENDER } from '../../../utils/constance.js';
-import { Form, useNavigation, redirect } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 
@@ -23,9 +23,6 @@ export const action = async ({ request }) => {
 
 const AddBasicInfo = () => {
   const { user } = useOutletContext(); //get the user from outlet
-  const navigation = useNavigation();
-  console.log("NAVI", navigation)
-  const isSubmitting = navigation.state === 'submitting'
 
   return (
     <Wrapper>
@@ -52,12 +49,7 @@ const AddBasicInfo = () => {
           <FormRow type='profession' labelText='職業' name='profession' id='profession'/>
           {/* <FormRow readOnly={true} defaultValue={user.id} labelText='資料新增者ID' name='history_recorder' id='history_recorder'/> */}
 
-          <button
-            type='submit'
-            className='btn btn-block form-btn '
-            disabled={isSubmitting}>
-            {isSubmitting ? 'submitting...' : 'submit'}
-          </button>
+          <SubmitBtn formBtn/>
         </div>
       </Form>
     </Wrapper>

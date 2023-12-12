@@ -1,9 +1,9 @@
 // import React from 'react'
-import { FormRow, FormRowSelect } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useLoaderData, useParams } from 'react-router-dom';
 // import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
-import { Form, useNavigation, redirect } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { BASICINFO_GENDER } from '../../../utils/constance.js';
@@ -33,9 +33,6 @@ export const action = async ({request, params}) => {
 
 const EditBasic = () => {
   const { basicInfo } = useLoaderData();
-  const navigation = useNavigation();
-  console.log(basicInfo);
-  const isSubmitting = navigation.state === 'submitting'
 
   return <Wrapper>
     <Form method='post' className='form'>
@@ -56,12 +53,7 @@ const EditBasic = () => {
           <FormRow type='number' labelText='手機號碼' name='phone' id='phone' defaultValue={basicInfo.phone}/>
           <FormRow type='email' labelText='電子郵件' name='email' id='email' defaultValue={basicInfo.email}/>
           <FormRow type='profession' labelText='職業' name='profession' id='profession' defaultValue={basicInfo.profession}/>
-          <button
-            type='submit'
-            className='btn btn-block form-btn '
-            disabled={isSubmitting}>
-            {isSubmitting ? 'submitting...' : 'submit'}
-          </button>
+          <SubmitBtn formBtn/>
       </div>
     </Form>
   </Wrapper>;
