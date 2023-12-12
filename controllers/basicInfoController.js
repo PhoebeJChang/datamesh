@@ -3,6 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 
 //Get all BasicInfo
 export const getAllBasicInfos = async (req, res) => {
+
+  /*********************************
+   * for searching and sorting
+   *********************************/
   const { search, sort } = req.query;
 
   const queryObject = {
@@ -14,6 +18,7 @@ export const getAllBasicInfos = async (req, res) => {
     //'&or' from mongo syntax
     queryObject.$or = [
       { id_number: { $regex: search, $options: 'i' } },
+      // add more search query if we need in the future
     ]
   }
 
@@ -27,9 +32,23 @@ export const getAllBasicInfos = async (req, res) => {
   //if client didn't select specific way, default will
   const sortKey = sortOptions[sort] || sortOptions.ascending;
 
-  // console.log(req.query)
-  const basicInfos = await BasicInfo.find(queryObject).sort(sortKey);
-  res.status(StatusCodes.OK).json({ basicInfos });
+  /*********************************
+   * setup for pagination
+   *********************************/
+  const totalBasicInfos = await BasicInfo.countDocuments(queryObject);
+  console.log(totalBasicInfos)
+
+  // get the current page from client but the default is page 1
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.page) || 20;
+  const skip = (page-1) * limit;
+
+  /*********************************
+   * send back json response
+   *********************************/
+  const basicInfos = await BasicInfo.find(queryObject).sort(sortKey).skip(skip).limit(limit);
+  const numOfPages = await Math.ceil(totalBasicInfos/limit);
+  res.status(StatusCodes.OK).json({ totalBasicInfos, numOfPages, currentPage: page, basicInfos });
 };
 
 //create BasicInfo
