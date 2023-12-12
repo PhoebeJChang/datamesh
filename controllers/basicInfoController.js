@@ -26,7 +26,7 @@ export const getAllBasicInfos = async (req, res) => {
     ascending: 'medical_history_no',
     descending: '-medical_history_no',
     'a-z': 'id_number',
-    'z-a': 'id_number'
+    'z-a': '-id_number'
   };
 
   //if client didn't select specific way, default will
