@@ -19,11 +19,11 @@ const links = [
     path: 'all-basicinfos', 
     icon: <FaIdCard />,
   },
-  {
-    text: 'edit basic Info', 
-    path: 'edit-basic', 
-    icon: <BsPencilSquare />,
-  },
+  // {
+  //   text: 'edit basic Info', 
+  //   path: 'edit-basic', 
+  //   icon: <BsPencilSquare />,
+  // },
   {
     text: 'DBs state', 
     path: 'dbs-state', 
