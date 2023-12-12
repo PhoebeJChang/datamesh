@@ -9,6 +9,17 @@ const SearchContainer = () => {
   const{ search, sort} = searchValues
   const submit = useSubmit();
 
+  const debounce = (onChange) => {
+    let timeout;
+    return (e) => {
+      const form = e.currentTarget.form;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 1500);
+    };
+  };
+
   return (
     <Wrapper>
       <Form className='form'>
@@ -17,18 +28,18 @@ const SearchContainer = () => {
           {/* search position */}
 
           <FormRow type='search' labelText='搜尋身份證字號' name='search' defaultValue={search}
-            onChange={(e) => {
-              submit(e.currentTarget.form)
-            }}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
           />
           <FormRowSelect
             name='sort'
             labelText='依照病例號碼排序/依照身分證字號排列'
             defaultValue={sort}
             list={[...Object.values(BASICINFO_SORT_BY)]}
-            onChange={(e) => {
-              submit(e.currentTarget.form)
-            }}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
           />
 
           <Link to='/dashboard/all-basicinfos' className='btn form-btn delete-btn'>
