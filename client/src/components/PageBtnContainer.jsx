@@ -7,11 +7,6 @@ const PageBtnContainer = () => {
   const {
     data: { numOfPages, currentPage },
   } = useAllBasicInfosContext();
-  // const { search, pathname } = useLocation();
-  // const navigate = useNavigate();
-  const pages = Array.from({ length: numOfPages }, (_, index) => {
-    return index + 1
-  });
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
@@ -35,6 +30,7 @@ const PageBtnContainer = () => {
     )
   }
 
+  // need to change the logic later
   const renderPageButtons = () => {
     const pageButtons = [];
 
