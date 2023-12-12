@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 import { BASICINFO_GENDER, DEPARTMENT } from "../utils/constance.js";
 
 const UserSchema = new mongoose.Schema({
-  _id: Number, //醫生代碼
+  id: Number, //醫生代碼
   name: String,
   phone: Number,
   email: String,
