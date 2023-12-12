@@ -4,7 +4,7 @@ import Wrapper from '../assets/wrappers/BasicInfo';
 // 病患 key 值翻譯
 const keyToChinese = {
     _id: "編號",
-    medical_history_no: "歷史編號",
+    medical_history_no: "病歷號碼",
     chief_complaint: "主訴",
     symptoms: "症狀",
     treatment_process: "治療過程",
