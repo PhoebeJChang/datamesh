@@ -5,7 +5,6 @@ export { default as Register } from './Register';
 export { default as Login } from './Login';
 export { default as Error } from './Error';
 export { default as Stats } from './Stats';
-export { default as AllJobs } from './AllJobs';
 export { default as AllBasicInfos } from './AllBasicInfos';
 export { default as DbsState } from './DbsState';
 export { default as AddMedCase } from './AddMedCase';
