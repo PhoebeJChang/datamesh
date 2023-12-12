@@ -40,14 +40,14 @@ export const getAllBasicInfos = async (req, res) => {
 
   // get the current page from client but the default is page 1
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.page) || 20;
+  const limit = Number(req.query.limit) || 2;
   const skip = (page-1) * limit;
 
   /*********************************
    * send back json response
    *********************************/
   const basicInfos = await BasicInfo.find(queryObject).sort(sortKey).skip(skip).limit(limit);
-  const numOfPages = await Math.ceil(totalBasicInfos/limit);
+  const numOfPages = Math.ceil(totalBasicInfos/limit);
   res.status(StatusCodes.OK).json({ totalBasicInfos, numOfPages, currentPage: page, basicInfos });
 };
 
