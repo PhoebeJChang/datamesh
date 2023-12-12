@@ -27,7 +27,7 @@ export const register = async (req, res) => {
  **************************/
 export const login = async (req, res) => {
   // check if the user exist
-  const user = await User.findOne({ _id: req.body.id })
+  const user = await User.findOne({ id: req.body.id })
   if (!user) {
     throw new UnauthenticatedError('醫師編號不存在或註冊')
   }
@@ -74,7 +74,7 @@ export const getUser = async (req, res) => {
 
 // EDIT User
 export const updateUser = async (req, res) => {
-  const updatedUser = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+  const updatedUser = await User.findOneAndUpdate({ id: req.params.id }, req.body, {
     new: true
   })
   res.status(StatusCodes.OK).json({ msg: 'User Updated' });
@@ -82,6 +82,6 @@ export const updateUser = async (req, res) => {
 
 // DELETE User
 export const deleteUser = async (req, res) => {
-  const removeUser = await User.findOneAndDelete({ _id: req.params.id });
+  const removeUser = await User.findOneAndDelete({ id: req.params.id });
   res.status(StatusCodes.OK).json({ msg: 'User Deleted' });
 }
