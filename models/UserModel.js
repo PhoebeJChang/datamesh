@@ -19,19 +19,6 @@ const UserSchema = new mongoose.Schema({
     // '急診醫學科', '家庭醫學科', '職業醫學科', '婦產科', '小兒科', '皮膚科', '耳鼻喉頭頸科', '眼科', '牙科', '復健科', '精神科', '骨科', '神經科', '一般醫學科', '麻醉科', '周邊血管科', '中醫科'] // 其他專科
   },
   password: String,
-  // createdAt: {
-  //   type: Date,
-  //   default: moment.tz(Date.now(), "Asia/Taipei")
-  // }, 
-  // updatedAt: {
-  //   type: Date,
-  //   default: moment.tz(Date.now(), "Asia/Taipei")
-  // }
-  // role: {
-  //   type: String,
-  //   enum: ['user', 'admin'],
-  //   default: 'user'
-  // }
 },
   {
     timestamps: true

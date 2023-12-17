@@ -24,7 +24,6 @@ const BasicInfSchema = new mongoose.Schema({
 },
   {
     timestamps: true
-  }
-);
+  });
 
 export default mongoose.model('basic_infos', BasicInfSchema);

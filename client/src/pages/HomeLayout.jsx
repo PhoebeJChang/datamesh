@@ -11,7 +11,6 @@ const HomeLayout = () => {
 			<Outlet />
 		</>
 	);
-
 };
 
 export default HomeLayout;
