@@ -1,7 +1,7 @@
 // import React from 'react';
 import { IoBarChartSharp } from 'react-icons/io5';
 import { MdQueryStats } from 'react-icons/md';
-import { FaIdCard, FaPenSquare, FaWpforms } from 'react-icons/fa';
+import { FaIdCard, FaPenSquare, FaWpforms, FaUsers } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings } from 'react-icons/md';
 import { BsPencilSquare } from 'react-icons/bs';
@@ -18,6 +18,11 @@ const links = [
     text: 'all basic info', 
     path: 'all-basicinfos', 
     icon: <FaIdCard />,
+  },
+  {
+    text: 'all users', 
+    path: 'all-users', 
+    icon: <FaUsers />,
   },
   // {
   //   text: 'edit basic Info', 

@@ -10,6 +10,7 @@ import {
   AddBasicInfo,
   Stats,
   AllBasicInfos,
+  AllUsers,
   Profile,
   Admin,
   DbsState,
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
             path: 'all-basicinfos',
             element: <AllBasicInfos />,
             loader: allBasicInfosLoader
+          },
+          {
+            path: 'all-users',
+            element: <AllUsers />,
           },
           {
             path: 'dbs-state',
