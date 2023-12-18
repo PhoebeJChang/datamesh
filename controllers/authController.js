@@ -65,9 +65,53 @@ export const logout = (req, res) => {
 /**************************
  * User APIs
  **************************/
+//Get all User
 export const getAllUsers = async (req, res) => {
-  const users = await User.find({});
-  res.status(StatusCodes.OK).json({ users });
+
+  /*********************************
+   * for searching and sorting
+   *********************************/
+  const { search, sort } = req.query;
+
+  const queryObject = {
+    //only show the info created by the current user
+    // history_recorder: req.user.userId,
+  }
+
+  if (search) {
+    //'&or' from mongo syntax
+    queryObject.$or = [
+      { id: { $regex: search, $options: 'i' } },
+      // add more search query if we need in the future
+    ]
+  }
+
+  const sortOptions = {
+    ascending: 'id',
+    descending: '-id',
+  };
+
+  //if client didn't select specific way, default will
+  const sortKey = sortOptions[sort] || sortOptions.ascending;
+
+  /*********************************
+   * setup for pagination
+   *********************************/
+  const totalusers = await User.countDocuments(queryObject);
+  console.log(totalusers)
+
+  // get the current page from client but the default is page 1
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 20;
+  const skip = (page-1) * limit;
+
+
+  /*********************************
+   * send back json response
+   *********************************/
+  const users = await User.find(queryObject).sort(sortKey).skip(skip).limit(limit);
+  const numOfPages = Math.ceil(totalusers/limit);
+  res.status(StatusCodes.OK).json({ totalusers, numOfPages, currentPage: page, users });
 };
 
 // GET SINGLE User
