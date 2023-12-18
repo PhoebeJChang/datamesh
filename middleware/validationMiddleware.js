@@ -133,9 +133,9 @@ export const validateIdParams = withValidationErrors([
     .isNumeric()
     .withMessage('invalid id format')
     .custom(async (id) => {
-      const user = await BasicInfo.findOne({ id })
+      const user = await User.findOne({ id })
       if (!user) {
-        throw new NotFoundError(`no patient with medical_history_no ${id}`)
+        throw new NotFoundError(`no user with id ${id}`)
       }
     })
 ]);

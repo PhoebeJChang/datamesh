@@ -62,14 +62,17 @@ export const logout = (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
 };
 
+/**************************
+ * User APIs
+ **************************/
 export const getAllUsers = async (req, res) => {
-  const basicInfos = await User.find({});
-  res.status(StatusCodes.OK).json({ basicInfos });
+  const users = await User.find({});
+  res.status(StatusCodes.OK).json({ users });
 };
 
 export const getUser = async (req, res) => {
-  const basicInfo = await User.findOne({ id: req.params.id })
-  res.status(StatusCodes.OK).json({ basicInfo });
+  const singleUser = await User.findOne({ id: req.params.id })
+  res.status(StatusCodes.OK).json({ singleUser });
 }
 
 // EDIT User
