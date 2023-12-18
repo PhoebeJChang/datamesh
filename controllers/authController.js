@@ -79,11 +79,15 @@ export const getAllUsers = async (req, res) => {
   }
 
   if (search) {
-    //'&or' from mongo syntax
-    queryObject.$or = [
-      { id: { $regex: search, $options: 'i' } },
-      // add more search query if we need in the future
-    ]
+    // Convert the search string to a number for querying
+    const numericSearch = parseInt(search);
+
+    if (!isNaN(numericSearch)) {
+      // If successfully converted the search string to a number, use it in the query
+      queryObject.id = numericSearch;
+    } else {
+      // If unable to convert the search string to a number, you can handle errors or perform other actions
+    }
   }
 
   const sortOptions = {
@@ -103,14 +107,14 @@ export const getAllUsers = async (req, res) => {
   // get the current page from client but the default is page 1
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 20;
-  const skip = (page-1) * limit;
+  const skip = (page - 1) * limit;
 
 
   /*********************************
    * send back json response
    *********************************/
   const users = await User.find(queryObject).sort(sortKey).skip(skip).limit(limit);
-  const numOfPages = Math.ceil(totalusers/limit);
+  const numOfPages = Math.ceil(totalusers / limit);
   res.status(StatusCodes.OK).json({ totalusers, numOfPages, currentPage: page, users });
 };
 

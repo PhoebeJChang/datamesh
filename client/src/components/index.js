@@ -5,5 +5,7 @@ export { default as SmallSideBar } from './SmallSideBar';
 export { default as NavBar } from './NavBar';
 export { default as FormRowSelect } from './FormRowSelect';
 export { default as BasicInfosContainer } from './BasicInfosContainer';
+export { default as UserMongosContainer } from './UserMongosContainer';
 export { default as SearchContainer } from './SearchContainer';
+export { default as SearchContainerUserMongo } from './SearchContainerUserMongo';
 export { default as SubmitBtn } from './SubmitBtn';

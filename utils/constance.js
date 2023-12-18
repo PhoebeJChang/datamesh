@@ -64,3 +64,10 @@ export const BASICINFO_SORT_BY = {
   ID_NUM_ASC: 'a-z',
   ID_NUM_DES: 'z-a'
 };
+
+export const USER_SORT_BY = {
+  // ASC = ASCENDING
+  // DES = DESCENDING
+  ID_ASCENDING: 'ascending',
+  ID_DESCENDING: 'descending',
+};

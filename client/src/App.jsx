@@ -24,6 +24,7 @@ import { action as loginAction } from "./pages/Login";
 import { action as addBasicInfoAction } from "./pages/AddBasicInfo";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { loader as allBasicInfosLoader } from "./pages/AllBasicInfos";
+import { loader as allUsersLoader } from "./pages/AllUsers";
 import { loader as editBasicLoader } from "./pages/EditBasic";
 import { action as editBasicAction } from "./pages/EditBasic";
 import { action as deleteBasicAction } from "./pages/DeleteBasic";
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
           {
             path: 'all-users',
             element: <AllUsers />,
+            loader: allUsersLoader
           },
           {
             path: 'dbs-state',
