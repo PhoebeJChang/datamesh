@@ -70,6 +70,7 @@ export const getAllUsers = async (req, res) => {
   res.status(StatusCodes.OK).json({ users });
 };
 
+// GET SINGLE User
 export const getUser = async (req, res) => {
   const singleUser = await User.findOne({ id: req.params.id })
   res.status(StatusCodes.OK).json({ singleUser });

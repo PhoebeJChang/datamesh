@@ -1,5 +1,13 @@
 import { Router } from "express";
-import { login, logout, register, getAllUsers, getUser, updateUser, deleteUser} from "../controllers/authController.js";
+import { 
+  login, 
+  logout, 
+  register, 
+  getAllUsers, 
+  getUser, 
+  updateUser, 
+  deleteUser
+} from "../controllers/authController.js";
 import { validateRegisterInput, validateLoginInput, validateIdParams} from "../middleware/validationMiddleware.js";
 const router = Router();
 
@@ -14,7 +22,7 @@ router.get('/logout', logout);
 router
   .route('/:id')
   .get(validateIdParams, getUser)
-  .put(validateRegisterInput, updateUser)
+  .patch(updateUser)
   .delete(validateIdParams, deleteUser)
 
 export default router;

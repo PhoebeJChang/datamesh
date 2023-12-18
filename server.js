@@ -31,12 +31,12 @@ app.use(express.json());
 const port = process.env.PORT || 5100;
 
 /*MYSQL註解掉的地方*/
-// const mysql_config = mysql.createConnection({
-//   host: process.env.MYSQL_HOST,
-//   user: process.env.MYSQL_USER,
-//   password: process.env.MYSQL_PASSWORD,
-//   database: "datamesh"
-// })
+const mysql_config = mysql.createConnection({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: "datamesh"
+})
 const azure_config = {
   user: process.env.AZURE_USER,
   password: process.env.AZURE_PASSWORD,
@@ -53,9 +53,9 @@ const azure_config = {
 try {
   await mongoose.connect(process.env.MONGO_URL)
   /*MYSQL註解掉的地方*/
-  // mysql_config.connect(function(err) {
-  //   if (err) throw err;
-  // });
+  mysql_config.connect(function(err) {
+    if (err) throw err;
+  });
   mssql.connect(azure_config);
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
@@ -85,7 +85,7 @@ app.get('/api/v1/test', (req, res) => {
 });
 //!!!!!!!!!!!!!!!!!!!!!!!!!
 //宣告要的router files
-app.use('/api/v1/medCases', medCaseRouter);
+app.use('/api/v1/medCases', authenticateUser, medCaseRouter);
 app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
 app.use('/api/v1/auth', authRouter);
 
