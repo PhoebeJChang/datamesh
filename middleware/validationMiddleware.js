@@ -81,13 +81,13 @@ export const validateBasicInfoInput = withValidationErrors([
   body('height')
     .notEmpty()
     .withMessage('height is required')
-    .isNumeric()
+    .isFloat()
     .withMessage('invalid height format'),
 
   body('weight')
     .notEmpty()
     .withMessage('weight is required')
-    .isNumeric()
+    .isFloat()
     .withMessage('invalid weight format'),
 
   body('address')
