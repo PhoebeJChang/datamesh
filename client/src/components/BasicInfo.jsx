@@ -24,7 +24,6 @@ const BasicInfo = ({
   phone,
   email,
   profession,
-  history_recorder
 }) => {
   const date = day(birth_date).format('MM/DD/YYYY')
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -72,7 +71,7 @@ const BasicInfo = ({
         <BasicInfoContent icon={<FaWeight />} text={weight + " kg"} />
         <BasicInfoContent icon={<FaPhone />} text={"+886 " + phone} />
         <BasicInfoContent icon={<FaBriefcase />} text={profession} />
-        <BasicInfoContent icon={<FaHospitalUser />} text={history_recorder} />
+        {/* <BasicInfoContent icon={<FaHospitalUser />} text={history_recorder} /> */}
 
         {/* <div className={`status they`}>{gender}</div> */}
 
