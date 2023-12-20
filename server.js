@@ -8,9 +8,11 @@ import { body, validationResult } from 'express-validator';
 //routers
 import medCaseRouter from './routes/medCaseRouter.js'
 import authRouter from './routes/authRouter.js';
-import showUser from './routes/showUserRouter.js';
 import basicInfoRouter from './routes/basicInfoRouter.js';
 import userRouter from './routes/userRouter.js';
+import showUser from './routes/showUserRouter.js';
+import showUserAzureRouter from './routes/showUserAzureRouter.js';
+import showUserMySQLRouter from './routes/showUserMySQLRouter.js';
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
@@ -30,6 +32,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cookieParser());
 app.use(express.json());
 const port = process.env.PORT || 5100;
+//azure
+const port2 = process.env.AZURE_PORT;
 
 /*MYSQL註解掉的地方*/
 const mysql_config = mysql.createConnection({
@@ -38,6 +42,9 @@ const mysql_config = mysql.createConnection({
   password: process.env.MYSQL_PASSWORD,
   database: "datamesh"
 })
+// module.exports=mysql_config;
+export default mysql_config;
+
 const azure_config = {
   user: process.env.AZURE_USER,
   password: process.env.AZURE_PASSWORD,
@@ -61,18 +68,21 @@ try {
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
   });
+  app.listen(port2, () => {
+    console.log(`server2 running on PORT ${port2}....`);
+  });
 
 } catch (error) {
   console.log(error);
   process.exit(1);
 }
 //respond to get request, query will move later
-app.get('/', (req, res) => {
+app.get('/api/v1/mysql', (req, res) => {
   // res.send('Hello');
-  mysql_config.query("select * from accounts", function (err, result) {
-    if (err) throw err;
-    res.send("Result: " + JSON.stringify(result));
-  });
+  // mysql_config.query("select * from users", (err, result) => {
+  //   if (err) throw err;
+  //   res.send("Result: " + JSON.stringify(result));
+  // });
 });
 //temporaly dont need it
 // app.post('/api/v1/test',
@@ -90,6 +100,8 @@ app.use('/api/v1/medCases', medCaseRouter);
 app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/showUser', authenticateUser, showUser);
+app.use('/api/v1/showUserAzure', authenticateUser, showUserAzureRouter);
+app.use('/api/v1/showUserMySQL', showUserMySQLRouter);
 
 //for admin pages (not yet created)
 app.use('/api/v1/users', authenticateUser, userRouter);
