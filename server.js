@@ -36,16 +36,16 @@ const port = process.env.PORT || 5100;
 const port2 = process.env.AZURE_PORT;
 
 /*MYSQL註解掉的地方*/
-const mysql_config = mysql.createConnection({
+export const mysql_config = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: "datamesh"
 })
-// module.exports=mysql_config;
-export default mysql_config;
 
-const azure_config = {
+// export default mysql_config;
+
+export const azure_config = {
   user: process.env.AZURE_USER,
   password: process.env.AZURE_PASSWORD,
   server: process.env.AZURE_SERVER,
@@ -58,6 +58,8 @@ const azure_config = {
     encrypt: true
   }
 }
+
+
 try {
   await mongoose.connect(process.env.MONGO_URL)
   /*MYSQL註解掉的地方*/
@@ -100,7 +102,7 @@ app.use('/api/v1/medCases', medCaseRouter);
 app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/showUser', authenticateUser, showUser);
-app.use('/api/v1/showUserAzure', authenticateUser, showUserAzureRouter);
+app.use('/api/v1/showUserAzure',  showUserAzureRouter);
 app.use('/api/v1/showUserMySQL', showUserMySQLRouter);
 
 //for admin pages (not yet created)

@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import mysql_config from "../server.js"
+import { mysql_config } from "../server.js"
 import express from 'express'
 
 //get all users

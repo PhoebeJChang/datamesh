@@ -6,7 +6,6 @@ import {
   // deleteUser
 } from "../controllers/showUserMySQLController.js";
 import { validateIdParams } from "../middleware/validationMiddleware.js";
-import mysql_config from "../server.js"
 const router = Router();
 
 //get all
