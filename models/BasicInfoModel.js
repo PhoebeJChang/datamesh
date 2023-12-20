@@ -17,10 +17,10 @@ const BasicInfSchema = new mongoose.Schema({
   phone: Number,
   email: String,
   profession: String,
-  history_recorder: {
-    type: Number,
-    ref: "User"
-  }
+  // history_recorder: {
+  //   type: Number,
+  //   ref: "User"
+  // }
 },
   {
     timestamps: true
