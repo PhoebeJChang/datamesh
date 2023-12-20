@@ -98,7 +98,13 @@ export const validateBasicInfoInput = withValidationErrors([
     .notEmpty()
     .withMessage('phone is required')
     .isMobilePhone('zh-TW')
-    .withMessage('invalid phone format'),
+    .withMessage('invalid phone format')
+    .custom(async (phone) => {
+      const user_phone = await BasicInfo.findOne({ phone })
+      if (user_phone) {
+        throw new BadRequestError('phone already exists');
+      }
+    }),
 
   body('email')
     .notEmpty()
