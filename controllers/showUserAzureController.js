@@ -15,8 +15,8 @@ export const getAllUsers = async (req, res) => {
   // Define the base SQL query
   let sqlQuery = "SELECT * FROM users WHERE 1=1"; // Start with a basic query
 
-   // Add searching
-   if (search) {
+  // Add searching
+  if (search) {
     // Customize the search criteria based on your requirements
     const numericSearch = parseInt(search);
     if (!isNaN(numericSearch)) {
@@ -51,8 +51,12 @@ export const getAllUsers = async (req, res) => {
   const countQuery = `SELECT COUNT(*) AS total FROM users WHERE 1=1${search ? ` AND (name LIKE '%${search}%' OR email LIKE '%${search}%')` : ''}`;
   const countResult = await request.query(countQuery);
 
-  const totalusers = countResult.recordset[0].total;
+  var totalusers = countResult.recordset[0].total;
   const numOfPages = Math.ceil(totalusers / limit);
+
+  if (totalusers == 0) {
+    totalusers = 1;
+  }
 
   // Add pagination (LIMIT and skip) to the main SQL query
   sqlQuery += ` OFFSET ${skip} ROWS FETCH NEXT ${limit} ROWS ONLY`;

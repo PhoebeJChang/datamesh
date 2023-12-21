@@ -55,7 +55,11 @@ export const getAllUsers = async (req, res) => {
       return;
     }
 
-    const totalusers = countResult[0].total;
+    var totalusers = countResult[0].total;
+
+    if (totalusers == 0) {
+      totalusers = 1;
+    }
 
     // Add pagination (LIMIT and OFFSET) to the main SQL query
     sqlQuery += ` LIMIT ${limit} OFFSET ${skip}`;
