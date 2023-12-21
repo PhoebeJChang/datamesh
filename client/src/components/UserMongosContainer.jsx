@@ -1,5 +1,5 @@
 import React from 'react'
-import UserMongo from './UserMongo'
+import UserDisplay from './UserDisplay'
 import Wrapper from '../assets/wrappers/BasicInfosContainer'
 import { useAllUsersMongoContext } from '../pages/AllUsers'
 import PageBtnContainer from './PageBtnContainer2' //be careful
@@ -18,7 +18,7 @@ const UserMongosContainer = () => {
     <h5>共{totalusers}筆 來自MongoDB的User資料{users.length > 1 }</h5>
     <div className="basicInfos">
       {users.map((user) => {
-        return <UserMongo key={user.id} {...user} />
+        return <UserDisplay key={user.id} {...user} />
       })}
     </div>
     {numOfPages > 1 && <PageBtnContainer/>}
