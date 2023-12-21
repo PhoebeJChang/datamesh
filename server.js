@@ -102,8 +102,8 @@ app.use('/api/v1/medCases', medCaseRouter);
 app.use('/api/v1/basicInfo', authenticateUser, basicInfoRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/showUser', authenticateUser, showUser);
-app.use('/api/v1/showUserAzure',  showUserAzureRouter);
-app.use('/api/v1/showUserMySQL', showUserMySQLRouter);
+app.use('/api/v1/showUserAzure',  authenticateUser, showUserAzureRouter);
+app.use('/api/v1/showUserMySQL', authenticateUser, showUserMySQLRouter);
 
 //for admin pages (not yet created)
 app.use('/api/v1/users', authenticateUser, userRouter);
