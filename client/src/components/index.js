@@ -10,4 +10,6 @@ export { default as UserMySQLsContainer } from './UserMySQLsContainer';
 export { default as UserAzuresContainer } from './UserAzuresContainer';
 export { default as SearchContainer } from './SearchContainer';
 export { default as SearchContainerUserMongo } from './SearchContainerUserMongo';
+export { default as SearchContainerUserAzure } from './SearchContainerUserAzure';
+export { default as SearchContainerUserMySQL } from './SearchContainerUserMySQL';
 export { default as SubmitBtn } from './SubmitBtn';

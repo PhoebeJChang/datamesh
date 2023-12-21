@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
-import { UserAzuresContainer } from '../components';
+import { UserAzuresContainer, SearchContainerUserAzure } from '../components';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 
@@ -31,7 +31,7 @@ const AllUsersAzure = () => {
   const { data, searchValues } = useLoaderData();
   return (
     <AllUsersAzureContext.Provider value={{ data, searchValues }}>
-      {/* <SearchContainerUserMongo /> */}
+      <SearchContainerUserAzure />
       <UserAzuresContainer />
     </AllUsersAzureContext.Provider>
   )

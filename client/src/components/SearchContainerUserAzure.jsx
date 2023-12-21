@@ -2,11 +2,11 @@ import { FormRow, FormRowSelect, SubmitBtn } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { USER_SORT_BY } from '../../../utils/constance';
-import { useAllUsersMongoContext } from '../pages/AllUsers'
+import { useAllUsersAzureContext } from '../pages/AllUsersAzure'
 
 
-const SearchContainerUserMongo = () => {
-  const { searchValues } = useAllUsersMongoContext();
+const SearchContainerUserAzure = () => {
+  const { searchValues } = useAllUsersAzureContext();
   const{ search, sort} = searchValues
   const submit = useSubmit();
 
@@ -43,7 +43,7 @@ const SearchContainerUserMongo = () => {
             })}
           />
 
-          <Link to='/dashboard/all-users-mongo' className='btn form-btn delete-btn'>
+          <Link to='/dashboard/all-users-azure' className='btn form-btn delete-btn'>
             重整搜尋項目
           </Link>
         </div>
@@ -52,4 +52,4 @@ const SearchContainerUserMongo = () => {
   )
 }
 
-export default SearchContainerUserMongo
+export default SearchContainerUserAzure

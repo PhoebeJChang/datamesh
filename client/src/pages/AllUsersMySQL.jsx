@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
-import { UserMySQLsContainer } from '../components';
+import { UserMySQLsContainer, SearchContainerUserMySQL } from '../components';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 
@@ -30,7 +30,7 @@ const AllUsersMySQL = () => {
   const { data, searchValues } = useLoaderData();
   return (
     <AllUsersMySQLContext.Provider value={{ data, searchValues }}>
-      {/* <SearchContainerUserMongo /> */}
+      <SearchContainerUserMySQL />
       <UserMySQLsContainer />
     </AllUsersMySQLContext.Provider>
   )
