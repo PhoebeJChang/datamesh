@@ -77,16 +77,10 @@ export const updateUser = async (req, res) => {
   var request = new mssql.Request()
   const userId = req.params.id;
   const q = "UPDATE users SET [name]=@name, birthday=@birthday, gender=@gender, department=@department, updatedAt=current_timestamp WHERE id=@userId"
-  // const values = [
-  //   req.body.name,
-  //   req.body.birthday,
-  //   req.body.gender,
-  //   req.body.department,
-  // ]
-  request.input('name', mssql.VarChar, req.body.name);
-  request.input('birthday', mssql.VarChar, req.body.birthday);
-  request.input('gender', mssql.VarChar, req.body.gender);
-  request.input('department', mssql.VarChar, req.body.department);
+  request.input('name', mssql.NVarChar, req.body.name);
+  request.input('birthday', mssql.NVarChar, req.body.birthday);
+  request.input('gender', mssql.NVarChar, req.body.gender);
+  request.input('department', mssql.NVarChar, req.body.department);
   request.input('userId', mssql.Int, userId);
 
   request.query(q, (err, result) => {
