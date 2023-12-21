@@ -38,13 +38,8 @@ export const getAllUsers = async (req, res) => {
   /*********************************
    * setup for pagination
    *********************************/
-
   var totalusers = 0;
-  var jsonObject = mysql_config.query("SELECT * FROM users");
 
-  totalusers = (Object.keys(jsonObject).length) / 9
-
-  // get the current page from client but the default is page 1
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 20;
   const skip = (page - 1) * limit;
@@ -54,13 +49,13 @@ export const getAllUsers = async (req, res) => {
   /*********************************
    * send back json response
    *********************************/
-  const numOfPages = Math.ceil(totalusers / limit);
 
   mysql_config.query("SELECT * FROM users", (err, users) => {
     if (err) throw err
+    totalusers = users.length;
+    const numOfPages = Math.ceil(totalusers / limit);
     res.status(StatusCodes.OK).json({ totalusers, numOfPages, currentPage: page, users });
   })
-
 }
 
 // Edit user
@@ -72,10 +67,12 @@ export const updateUser = async (req, res) => {
     req.body.birthday,
     req.body.gender,
     req.body.department,
-
   ]
   mysql_config.query(q, [...values, userId], (err, data) => {
-    if (err) return res.json(err)
+    if (err) {
+      console.error(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'An error occurred' })
+    }
     return res.json("User has been updated.")
   })
 
