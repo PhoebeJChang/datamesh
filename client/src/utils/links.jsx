@@ -20,8 +20,18 @@ const links = [
     icon: <FaIdCard />,
   },
   {
-    text: 'all users', 
-    path: 'all-users', 
+    text: 'all users Mongo', 
+    path: 'all-users-mongo', 
+    icon: <FaUsers />,
+  },
+  {
+    text: 'all users MySQL', 
+    path: 'all-users-mysql', 
+    icon: <FaUsers />,
+  },
+  {
+    text: 'all users Azure', 
+    path: 'all-users-azure', 
     icon: <FaUsers />,
   },
   // {

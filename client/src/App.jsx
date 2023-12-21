@@ -11,6 +11,8 @@ import {
   Stats,
   AllBasicInfos,
   AllUsers,
+  AllUsersMySQL,
+  AllUsersAzure,
   Profile,
   Admin,
   DbsState,
@@ -85,9 +87,19 @@ const router = createBrowserRouter([
             loader: allBasicInfosLoader
           },
           {
-            path: 'all-users',
+            path: 'all-users-mongo',
             element: <AllUsers />,
             loader: allUsersLoader
+          },
+          {
+            path: 'all-users-mysql',
+            element: <AllUsersMySQL />,
+            // loader: allUsersLoader
+          },
+          {
+            path: 'all-users-azure',
+            element: <AllUsersAzure />,
+            // loader: allUsersLoader
           },
           {
             path: 'dbs-state',
