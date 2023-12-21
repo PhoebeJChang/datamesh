@@ -13,9 +13,13 @@ const UserAzuresContainer = () => {
     </Wrapper>
   }
 
+  if(totalusers === 0){
+    totalusers = 1;
+  }
+
   return (
     <Wrapper>
-      <h5>共{totalusers}筆 來自Azure SQL的User資料{users.length > 1}</h5>
+      <h5>共{totalusers}筆 來自Azure SQL的User資料{users.length > 1 || totalusers > 0}</h5>
       <div className="basicInfos">
         {users.map((user) => {
           return <UserDisplay key={user.id} {...user} />

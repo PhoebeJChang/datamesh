@@ -113,6 +113,10 @@ app.use('/api/v1/showUserMySQL', authenticateUser, showUserMySQLRouter);
 //for admin pages (not yet created)
 app.use('/api/v1/users', authenticateUser, userRouter);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+});
+
 //any method, all the urls
 //everytime the user trying to access some kinf of resource that we don't have on our server
 //send 404
