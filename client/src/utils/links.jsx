@@ -39,11 +39,6 @@ const links = [
   //   path: 'edit-basic', 
   //   icon: <BsPencilSquare />,
   // },
-  {
-    text: 'DBs state', 
-    path: 'dbs-state', 
-    icon: <MdQueryStats />,
-  },
   // {
   //   text: 'stats', 
   //   path: 'stats', 
