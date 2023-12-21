@@ -15,7 +15,8 @@ import {
   AllUsersAzure,
   Profile,
   Admin,
-  EditBasic
+  EditBasic,
+  EditUserMongo
 } from './pages'
 //if the export is 'default'then we don't need {}   
 
@@ -29,7 +30,9 @@ import { loader as allUsersLoader } from "./pages/AllUsers";
 import { loader as allUsersAzureLoader } from "./pages/AllUsersAzure";
 import { loader as allUsersMySQLLoader } from "./pages/AllUsersMySQL";
 import { loader as editBasicLoader } from "./pages/EditBasic";
+import { loader as editUserMongoLoader } from "./pages/EditUserMongo";
 import { action as editBasicAction } from "./pages/EditBasic";
+import { action as editUserMongoAction } from "./pages/EditUserMongo";
 import { action as deleteBasicAction } from "./pages/DeleteBasic";
 
 export const checkDefaultTheme = () => {
@@ -112,6 +115,24 @@ const router = createBrowserRouter([
             loader: editBasicLoader,
             action: editBasicAction,
           },
+          {
+            path: 'edit-user-mongo/:id',
+            element: <EditUserMongo />,
+            loader: editUserMongoLoader,
+            action: editUserMongoAction,
+          },
+          // {
+          //   path: 'edit-user-mysql/:id',
+          //   element: <EditBasic />,
+          //   loader: editBasicLoader,
+          //   action: editBasicAction,
+          // },
+          // {
+          //   path: 'edit-user-azure/:id',
+          //   element: <EditBasic />,
+          //   loader: editBasicLoader,
+          //   action: editBasicAction,
+          // },
           {
             path: 'delete-basic/:id',
             action: deleteBasicAction,

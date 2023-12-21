@@ -43,7 +43,7 @@ const UserDisplay = ({
 
       </div>
       <footer className='actions'>
-        {/* <Link to={`../edit-basic/${medical_history_no}`} className='btn edit-btn'>Edit</Link> */}
+        <Link to={`../edit-user-mongo/${id}`} className='btn edit-btn'>Edit</Link>
         
       </footer>
     </div>
