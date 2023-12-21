@@ -10,52 +10,68 @@ export const getAllUsers = async (req, res) => {
    *********************************/
   const { search, sort } = req.query;
 
-  const queryObject = {
-    //only show the info created by the current user
-    // history_recorder: req.user.userId,
-  }
+  // Define the base SQL query
+  let sqlQuery = "SELECT * FROM users WHERE 1=1"; // Start with a basic query
 
+  // Add filtering
   if (search) {
-    // Convert the search string to a number for querying
+    // Customize the search criteria based on your requirements
     const numericSearch = parseInt(search);
-
     if (!isNaN(numericSearch)) {
-      // If successfully converted the search string to a number, use it in the query
-      queryObject.id = numericSearch;
+      sqlQuery += ` AND id = ${numericSearch}`;
     } else {
-      // If unable to convert the search string to a number, you can handle errors or perform other actions
+      sqlQuery += ` AND (name LIKE '%${search}%' OR email LIKE '%${search}%')`;
     }
   }
 
+  // Define sort options
   const sortOptions = {
-    ascending: 'id',
-    descending: '-id',
+    ascending: 'id ASC',
+    descending: 'id DESC',
   };
 
   //if client didn't select specific way, default will
+  // Determine the sort key
   const sortKey = sortOptions[sort] || sortOptions.ascending;
+
+  // Add sorting
+  sqlQuery += ` ORDER BY ${sortKey}`;
 
   /*********************************
    * setup for pagination
    *********************************/
-  var totalusers = 0;
-
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 20;
   const skip = (page - 1) * limit;
 
-  console.log('page', page)
+  // Calculate the total number of records without applying limit and offset
+  const countQuery = `SELECT COUNT(*) AS total FROM users WHERE 1=1${search ? ` AND (name LIKE '%${search}%' OR email LIKE '%${search}%')` : ''}`;
 
-  /*********************************
-   * send back json response
-   *********************************/
+  // Execute the countQuery to get the total count of users
+  mysql_config.query(countQuery, (err, countResult) => {
+    if (err) {
+      console.error(err);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'An error occurred' });
+      return;
+    }
 
-  mysql_config.query("SELECT * FROM users", (err, users) => {
-    if (err) throw err
-    totalusers = users.length;
-    const numOfPages = Math.ceil(totalusers / limit);
-    res.status(StatusCodes.OK).json({ totalusers, numOfPages, currentPage: page, users });
-  })
+    const totalusers = countResult[0].total;
+
+    // Add pagination (LIMIT and OFFSET) to the main SQL query
+    sqlQuery += ` LIMIT ${limit} OFFSET ${skip}`;
+
+    // Execute the sqlQuery to fetch paginated user data
+    mysql_config.query(sqlQuery, (err, users) => {
+      if (err) {
+        console.error(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'An error occurred' });
+        return;
+      }
+
+      const numOfPages = Math.ceil(totalusers / limit);
+      res.status(StatusCodes.OK).json({ totalusers, numOfPages, currentPage: page, users });
+    });
+  });
 }
 
 // Edit user
