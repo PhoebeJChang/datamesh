@@ -102,7 +102,6 @@ export const getAllUsers = async (req, res) => {
    * setup for pagination
    *********************************/
   const totalusers = await User.countDocuments(queryObject);
-  console.log(totalusers)
 
   // get the current page from client but the default is page 1
   const page = Number(req.query.page) || 1;
