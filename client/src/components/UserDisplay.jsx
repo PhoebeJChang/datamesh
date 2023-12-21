@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {  FaCalendarAlt, FaVenusMars, FaPhone, FaArrowsAlt, FaHospitalUser, FaCalendarCheck,  } from 'react-icons/fa';
 import { Link, Form } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/BasicInfo';
-import UserMongoContent from './UserMongoContent';
+import UserContent from './UserContent';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 day.extend(advancedFormat);
 
-const UserMongo = ({
+const UserDisplay = ({
   _id,
   id,
   name,
@@ -34,12 +34,12 @@ const UserMongo = ({
     </header>
     <div className="content">
       <div className="content-center">
-        <UserMongoContent icon={<FaVenusMars />} text={gender} />
-        <UserMongoContent icon={<FaCalendarAlt />} text={date} />
-        <UserMongoContent icon={<FaPhone />} text={"+886 " + phone} />
-        <UserMongoContent icon={<FaHospitalUser />} text={department} />
-        <UserMongoContent icon={<FaCalendarCheck />} text={createdAt} />
-        <UserMongoContent icon={<FaArrowsAlt />} text={updatedAt} />
+        <UserContent icon={<FaVenusMars />} text={gender} />
+        <UserContent icon={<FaCalendarAlt />} text={date} />
+        <UserContent icon={<FaPhone />} text={"+886 " + phone} />
+        <UserContent icon={<FaHospitalUser />} text={department} />
+        <UserContent icon={<FaCalendarCheck />} text={createdAt} />
+        <UserContent icon={<FaArrowsAlt />} text={updatedAt} />
 
       </div>
       <footer className='actions'>
@@ -51,4 +51,4 @@ const UserMongo = ({
   )
 }
 
-export default UserMongo
+export default UserDisplay

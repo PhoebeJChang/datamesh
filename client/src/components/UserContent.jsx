@@ -1,7 +1,7 @@
 import React from 'react'
 import Wrapper from '../assets/wrappers/BasicInfoContent';
 
-const UserMongoContent = ({ icon, text }) => {
+const UserContent = ({ icon, text }) => {
   return (
     <Wrapper>
       <span className='basic-icon'>{icon}</span>
@@ -10,4 +10,4 @@ const UserMongoContent = ({ icon, text }) => {
   )
 }
 
-export default UserMongoContent
+export default UserContent
