@@ -13,5 +13,7 @@ export { default as AddMedCase } from './AddMedCase';
 export { default as AddBasicInfo } from './AddBasicInfo'
 export { default as EditBasic } from './EditBasic';
 export { default as EditUserMongo } from './EditUserMongo';
+export { default as EditUserAzure } from './EditUserAzure';
+export { default as EditUserMySQL } from './EditUserMySQL';
 export { default as Profile } from './Profile';
 export { default as Admin } from './Admin';

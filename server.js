@@ -70,9 +70,6 @@ try {
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
   });
-  app.listen(port2, () => {
-    console.log(`server2 running on PORT ${port2}....`);
-  });
 
 } catch (error) {
   console.log(error);

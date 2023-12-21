@@ -1,5 +1,5 @@
 import React from 'react'
-import UserDisplay from './UserDisplay'
+import UserDisplay from './UserDisplayAzure'
 import Wrapper from '../assets/wrappers/BasicInfosContainer'
 import { useAllUsersAzureContext } from '../pages/AllUsersAzure'
 import PageBtnContainer from './PageBtnAzureContainer' //be careful

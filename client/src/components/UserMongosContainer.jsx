@@ -1,5 +1,5 @@
 import React from 'react'
-import UserDisplay from './UserDisplay'
+import UserDisplay from './UserDisplayMongo'
 import Wrapper from '../assets/wrappers/BasicInfosContainer'
 import { useAllUsersMongoContext } from '../pages/AllUsers'
 import PageBtnContainer from './PageBtnMongoContainer' //be careful

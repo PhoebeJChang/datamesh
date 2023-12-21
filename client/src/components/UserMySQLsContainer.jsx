@@ -1,5 +1,5 @@
 import React from 'react'
-import UserDisplay from './UserDisplay'
+import UserDisplay from './UserDisplayMySQL'
 import Wrapper from '../assets/wrappers/BasicInfosContainer'
 import { useAllUsersMySQLContext } from '../pages/AllUsersMySQL'
 import PageBtnContainer from './PageBtnMySQLContainer' //be careful

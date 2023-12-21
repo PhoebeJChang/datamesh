@@ -31,8 +31,12 @@ import { loader as allUsersAzureLoader } from "./pages/AllUsersAzure";
 import { loader as allUsersMySQLLoader } from "./pages/AllUsersMySQL";
 import { loader as editBasicLoader } from "./pages/EditBasic";
 import { loader as editUserMongoLoader } from "./pages/EditUserMongo";
+import EditUserMySQL, { loader as editUserMySQLLoader } from "./pages/EditUserMySQL";
+import EditUserAzure, { loader as editUserAzureLoader } from "./pages/EditUserAzure";
 import { action as editBasicAction } from "./pages/EditBasic";
 import { action as editUserMongoAction } from "./pages/EditUserMongo";
+import { action as editUserAzureAction } from "./pages/EditUserAzure";
+import { action as editUserMySQLAction } from "./pages/EditUserMySQL";
 import { action as deleteBasicAction } from "./pages/DeleteBasic";
 
 export const checkDefaultTheme = () => {
@@ -121,18 +125,18 @@ const router = createBrowserRouter([
             loader: editUserMongoLoader,
             action: editUserMongoAction,
           },
-          // {
-          //   path: 'edit-user-mysql/:id',
-          //   element: <EditBasic />,
-          //   loader: editBasicLoader,
-          //   action: editBasicAction,
-          // },
-          // {
-          //   path: 'edit-user-azure/:id',
-          //   element: <EditBasic />,
-          //   loader: editBasicLoader,
-          //   action: editBasicAction,
-          // },
+          {
+            path: 'edit-user-mysql/:id',
+            element: <EditUserMySQL />,
+            loader: editUserMySQLLoader,
+            action: editUserMySQLAction,
+          },
+          {
+            path: 'edit-user-azure/:id',
+            element: <EditUserAzure />,
+            loader: editUserAzureLoader,
+            action: editUserAzureAction,
+          },
           {
             path: 'delete-basic/:id',
             action: deleteBasicAction,
