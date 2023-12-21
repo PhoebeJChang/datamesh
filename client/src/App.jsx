@@ -15,7 +15,6 @@ import {
   AllUsersAzure,
   Profile,
   Admin,
-  DbsState,
   EditBasic
 } from './pages'
 //if the export is 'default'then we don't need {}   
@@ -102,10 +101,6 @@ const router = createBrowserRouter([
             path: 'all-users-azure',
             element: <AllUsersAzure />,
             loader: allUsersAzureLoader
-          },
-          {
-            path: 'dbs-state',
-            element: <DbsState />,
           },
           {
             path: 'profile',
