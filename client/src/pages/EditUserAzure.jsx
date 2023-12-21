@@ -14,7 +14,7 @@ export const loader = async ({ params }) => {
     return data;
   } catch (error) {
     toast.error(error.response.data.msg);
-    return redirect('/dashboard/all-users-mongo');
+    return redirect('/dashboard/all-users-azure');
   }
 };
 export const action = async ({ request, params }) => {
@@ -23,7 +23,7 @@ export const action = async ({ request, params }) => {
   try {
     await customFetch.patch(`/showUserAzure/${params.id}`, data);
     toast.success('User更新成功');
-    return redirect('/dashboard/all-users-mongo');
+    return redirect('/dashboard/all-users-azure');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
