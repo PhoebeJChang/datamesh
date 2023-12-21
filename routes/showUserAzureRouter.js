@@ -1,20 +1,20 @@
-import { Router } from "express";
-// import { 
-//   getAllUsers, 
-//   getUser, 
-//   updateUser, 
-//   deleteUser
-// } from "../controllers/authController.js";
-// import {  validateIdParams} from "../middleware/validationMiddleware.js";
+import { Router, query } from "express";
+import {
+  getAllUsers,
+  updateUser,
+  // getSingleUser,
+  // deleteUser
+} from "../controllers/showUserAzureController.js";
+import { validateIdParams } from "../middleware/validationMiddleware.js";
 const router = Router();
 
+//get all
+router.route('/').get(getAllUsers)
 
-// router.route('/').get(getAllUsers)
-
-// router
-//   .route('/:id')
+router
+  .route('/:id')
+  .patch(updateUser)
 //   .get(validateIdParams, getUser)
-//   .patch(updateUser)
 //   .delete(validateIdParams, deleteUser)
 
 export default router;

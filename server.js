@@ -80,8 +80,8 @@ try {
 }
 //respond to get request, query will move later
 app.get('/api/v1/mysql', (req, res) => {
-  // res.send('Hello');
-  // mysql_config.query("select * from users", (err, result) => {
+  // var request = new mssql.Request()
+  // request.query(`select * from users`, (err, result) => {
   //   if (err) throw err;
   //   res.send("Result: " + JSON.stringify(result));
   // });
