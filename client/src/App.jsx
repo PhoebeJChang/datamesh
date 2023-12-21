@@ -27,6 +27,8 @@ import { action as addBasicInfoAction } from "./pages/AddBasicInfo";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { loader as allBasicInfosLoader } from "./pages/AllBasicInfos";
 import { loader as allUsersLoader } from "./pages/AllUsers";
+import { loader as allUsersAzureLoader } from "./pages/AllUsersAzure";
+import { loader as allUsersMySQLLoader } from "./pages/AllUsersMySQL";
 import { loader as editBasicLoader } from "./pages/EditBasic";
 import { action as editBasicAction } from "./pages/EditBasic";
 import { action as deleteBasicAction } from "./pages/DeleteBasic";
@@ -94,12 +96,12 @@ const router = createBrowserRouter([
           {
             path: 'all-users-mysql',
             element: <AllUsersMySQL />,
-            // loader: allUsersLoader
+            loader: allUsersMySQLLoader
           },
           {
             path: 'all-users-azure',
             element: <AllUsersAzure />,
-            // loader: allUsersLoader
+            loader: allUsersAzureLoader
           },
           {
             path: 'dbs-state',
