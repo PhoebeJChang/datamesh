@@ -1,5 +1,9 @@
 # Data Mesh
 
+## Website link
+Click [DataMesh](https://datamesh-kafka-v1.onrender.com) to visit our fianl project website.
+
+
 ## Abstract
 
 This study focuses on the 'Data Mesh' technology, aiming to address the challenges traditional Hospital Information Systems (HIS) face in Taiwan. Faced with the lack of effective integration and sharing mechanisms among multiple database systems, this research tackles both structured and unstructured data and the complexity of heterogeneous databases. Considering the ever-increasing data volume, we focus on realizing data decentralization and distributed storage.
