@@ -2,8 +2,8 @@
 This is a graduation group project for the Bachelor of Computer Science and Information Engineering program at Fu Jen Catholic University, Taiwan.
 
 ## Website link
-Click [DataMesh](https://datamesh-kafka-v1.onrender.com) to visit our fianl project website.
-
+Click [DataMesh](https://datamesh-kafka-v1.onrender.com) to visit our final project website.
+(The page may not work because the databases is no longer running)
 
 ## Abstract
 
