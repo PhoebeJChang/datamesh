@@ -19,6 +19,5 @@ This study has practical significance in solving data management challenges in t
 
 
 ## UI Screenshots
-♦	Landing Page
+- Landing Page
 ![image](https://github.com/PhoebeJChang/datamesh/assets/92656560/e5e70d4e-9c57-490e-974a-8da5ce7d06b6)
-
