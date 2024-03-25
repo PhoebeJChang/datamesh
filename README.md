@@ -17,3 +17,8 @@ Finally, we designed a one-page case management website using the MERN stack arc
 
 This study has practical significance in solving data management challenges in the medical field and provides a valuable reference for future research and practices in similar domains.
 
+
+## UI Screenshots
+♦	Landing Page
+![image](https://github.com/PhoebeJChang/datamesh/assets/92656560/e5e70d4e-9c57-490e-974a-8da5ce7d06b6)
+
